@@ -1,10 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import * as authActions from "../redux/actions/authActions";
+import * as authActions from "../../redux/actions/authActions";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import style from "../assets/RouteStyle/signin.module.scss";
-import Button from "../components/ErrorBoundary/Button";
+import style from "../../assets/RouteStyle/signin.module.scss";
+import Button from "../../components/ErrorBoundary/Button";
 
 export default function SignIn() {
   const dispatch = useDispatch();

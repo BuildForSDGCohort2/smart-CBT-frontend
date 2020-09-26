@@ -5,9 +5,9 @@ import {
   Route,
 } from "react-router-dom";
 import ProtectedRoutes from './components/ProtectedRoute';
-import SignIn from './routes/SignIn'
+import SignIn from './routes/admin/SignIn'
 // const Upload = React.lazy(() => import('./routes/Upload'));
-const Dashboard = React.lazy(() => import('./routes/Dashboard'));
+const Dashboard = React.lazy(() => import('./routes/admin/Dashboard'));
 
 export default function app() {
   return (

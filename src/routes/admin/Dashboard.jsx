@@ -1,6 +1,7 @@
 import React from "react";
-import Layout from "../components/Layout";
-import style from "../assets/RouteStyle/dashboard.module.scss";
+import Layout from "../../components/Layout";
+import style from "../../assets/RouteStyle/dashboard.module.scss";
+import Table from "../../components/Table";
 
 export default function Dashboard() {
   const topSection = [
@@ -40,6 +41,10 @@ export default function Dashboard() {
             </div>
           );
         })}
+      </div>
+      <Table/>
+      <div>
+        
       </div>
     </Layout>
   );
