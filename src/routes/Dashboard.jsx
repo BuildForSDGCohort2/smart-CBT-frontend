@@ -1,9 +1,46 @@
-import React from 'react'
+import React from "react";
+import Layout from "../components/Layout";
+import style from "../assets/RouteStyle/dashboard.module.scss";
 
 export default function Dashboard() {
-    return (
-        <div>
-            
-        </div>
-    )
+  const topSection = [
+    {
+      icon: "",
+      name: "Teachers",
+      amt: "70000",
+    },
+    {
+      icon: "",
+      name: "students",
+      amt: "70000",
+    },
+    {
+      icon: "",
+      name: "Courses",
+      amt: "70000",
+    },
+    {
+      icon: "",
+      name: "Questions",
+      amt: "70000",
+    },
+  ];
+  return (
+    <Layout>
+      <div className={style["user__stats"]}>
+        {topSection.map((item, index) => {
+          return (
+            <div key={10 * index} className={style["user__stats--item"]}>
+              <div>
+                <span>{item.icon} </span>
+                <br />
+                <span>{item.name} </span>
+              </div>
+              <span className={style["amt"]}>{item.amt} </span>
+            </div>
+          );
+        })}
+      </div>
+    </Layout>
+  );
 }

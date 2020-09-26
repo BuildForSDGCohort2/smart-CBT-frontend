@@ -1,0 +1,206 @@
+$blue: #8ea1d6;
+$darkblue: #182138;
+$green: #14b08b;
+$darkgreen: #00372a;
+$orange: #f9a825;
+$ash: #dfdddd;
+$white: #ffffff;
+$ice: #f9f9ff;
+$grey: #ccc;
+$black: #000000;
+$yellow: #fff3df80;
+
+
+/*===================
+===== Breakpoints ==========
+=====================
+**/
+
+$break-point-s: 576px;
+$break-point-md: 782px;
+$break-point-l: 992px;
+$break-point-xl: 1024px;
+$break-point-xxl: 1200px;
+
+/* ==================
+==== Fonts ==========
+=====================
+**/
+
+// @font-face {
+//   font-family: " Fira Sans regular ";
+//   src: url("../assets/fonts/FiraSans-Bold.ttf");
+// }
+// @font-face {
+//   font-family: "Fira Sans regular";
+//   src: url("../assets/fonts/FiraSans-Regular.ttf");
+// }
+// @font-face {
+//   font-family: "Fira Sans bold";
+//   src: url("../assets/fonts/FiraSans-Bold.ttf");
+// }
+// @font-face {
+//   font-family: "Fira Sans medium";
+//   src: url("../assets/fonts/FiraSans-Medium.ttf");
+// }
+// @font-face {
+//   font-family: "Fira Sans regular";
+//   src: url("../assets/fonts/FiraSans-Medium.ttf");
+// }
+
+/*** Extends ***/
+
+%body {
+  font-family: "Fira Sans regular";
+}
+
+%h {
+  font-family: "Fira Sans bold";
+  font-weight: bold;
+}
+
+%h1 {
+  @extend %h;
+  font-size: 34px;
+  line-height: 1.25em;
+}
+
+%h2 {
+  @extend %h;
+  font-size: 1.625em;
+  line-height: 1.15384615em;
+}
+
+%h3 {
+  @extend %h;
+  font-size: 1.375em;
+  line-height: 1.13636364em;
+}
+
+%h4 {
+  @extend %h;
+  font-size: 1.125em;
+  line-height: 1.22222222em;
+}
+%h4 {
+  @extend %h;
+  font-size: 25px;
+  line-height: 31px;
+}
+
+%p1 {
+  font-family: "Fira Sans regular";
+  font-size: 16px;
+  line-height: 30px;
+}
+
+%p2 {
+  font-family: "Fira Sans regular";
+  font-size: 16px;
+  line-height: 24px;
+}
+
+%p-footer {
+  font-family: "Fira Sans regular";
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: normal;
+  color: $blue;
+}
+
+%p1-reqular {
+  @extend %p1;
+  font-weight: normal;
+}
+
+%p1-medium {
+  @extend %p1;
+  font-weight: 500;
+}
+
+%p2-regular {
+  @extend %p2;
+  font-weight: normal;
+}
+
+%p2-medium {
+  @extend %p2;
+  font-weight: 500;
+}
+
+/*** Grid ***/
+
+%flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+%container {
+  width: 90%;
+  margin: 0 auto;
+
+  @media screen and (min-width: $break-point-s) {
+    width: 85%;
+  }
+
+  @media screen and (min-width: $break-point-md) {
+    width: 80%;
+  }
+}
+
+h1 {
+  @extend %h;
+  margin: 0;
+  font-size: 50px;
+  line-height: 60px;
+  /* identical to box height */
+
+  /* or 24px */
+}
+
+h2 {
+  @extend %h;
+
+  margin: 0;
+
+  font-style: normal;
+  font-weight: bold;
+  font-size: 40px;
+  line-height: 48px;
+  /* identical to box height */
+  /* or 24px */
+}
+
+h3 {
+  @extend %h;
+  margin: 0;
+  font-family: "Fira Sans medium";
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 30px;
+  /* identical to box height */
+}
+
+h4 {
+  @extend %h;
+
+  font-family: "Fira Sans medium";
+  font-style: normal;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
+}
+
+p,
+label,
+a,
+span {
+  @extend %body;
+  margin: 0;
+  font-style: normal;
+  font-weight: 400px;
+  font-size: 16px;
+  line-height: 1.618;
+  /* or 186% */
+}

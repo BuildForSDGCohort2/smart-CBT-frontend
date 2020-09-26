@@ -4,8 +4,10 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
+import ProtectedRoutes from './components/ProtectedRoute';
 import SignIn from './routes/SignIn'
 // const Upload = React.lazy(() => import('./routes/Upload'));
+const Dashboard = React.lazy(() => import('./routes/Dashboard'));
 
 export default function app() {
   return (
@@ -13,7 +15,8 @@ export default function app() {
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <Route exact path="/" component={SignIn} />
-          {/* <Route exact path="/upload" component={Upload} /> */}
+          <ProtectedRoutes exact path="/dashboard" component={Dashboard} />
+
         </Switch>
       </Suspense>
     </Router>

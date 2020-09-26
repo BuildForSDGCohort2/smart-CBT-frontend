@@ -1,0 +1,24 @@
+@import "../../assets/RouteStyle/base.scss";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 0 1rem;
+}
+.container {
+    width: 350px;
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      margin: .5rem;
+      padding: 1rem;
+      background: $blue;
+      a {
+        text-decoration: none;
+        color: $darkblue;
+      }
+    }
+  }
+}
