@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../../components/Layout";
 import style from "../../assets/RouteStyle/dashboard.module.scss";
 import Table from "../../components/Table";
+import Students from "../../components/Students";
 
 export default function Dashboard() {
   const topSection = [
@@ -42,10 +43,8 @@ export default function Dashboard() {
           );
         })}
       </div>
-      <Table/>
-      <div>
-        
-      </div>
+      {/* <Table/> */}
+        <Students/>
     </Layout>
   );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as authActions from "../../redux/actions/authActions";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -8,6 +8,9 @@ import Button from "../../components/ErrorBoundary/Button";
 
 export default function SignIn() {
   const dispatch = useDispatch();
+  const state = useSelector((state) => state.state);
+
+  console.log("state",state)
 
   React.useEffect(() => {
     // dispatch(authActions.adminLogin());
@@ -22,8 +25,7 @@ export default function SignIn() {
             .max(15, "Must be 15 characters or less")
             // .email("Invalid email address")
             .required("Required"),
-            password: Yup.string()
-            .required("Required"),
+          password: Yup.string().required("Required"),
         })}
         onSubmit={({ email, password }, { setSubmitting }) => {
           const formData = new FormData();

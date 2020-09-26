@@ -15,7 +15,7 @@ export default function app() {
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <Route exact path="/" component={SignIn} />
-          <ProtectedRoutes exact path="/dashboard" component={Dashboard} />
+          <ProtectedRoutes exact path="/admin/dashboard" component={Dashboard} />
 
         </Switch>
       </Suspense>

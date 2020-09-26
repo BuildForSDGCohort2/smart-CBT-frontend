@@ -1,0 +1,87 @@
+@import "../../assets/RouteStyle/base.scss";
+
+.form--wrapper,
+.form--container,
+.action__area {
+  display: flex;
+}
+
+.student--container {
+  justify-content: space-between;
+}
+
+.form--container,
+.student--container {
+  width: 100%;
+}
+
+.form--container {
+  place-content: center;
+  place-items: center;
+  // min-height: 100vh;
+}
+
+.form--wrapper {
+  padding: 4rem 2rem;
+}
+
+.error__message {
+  color: red;
+  margin: 0;
+  margin: 1rem 0;
+}
+
+.form--wrapper {
+  flex-direction: column;
+  height: fit-content;
+  width: 30%;
+  label {
+    margin-bottom: 1rem;
+  }
+
+  input {
+    // padding: 0.5rem;
+  }
+}
+
+.form--wrapper,
+.table {
+  background: $white;
+}
+
+.student--container {
+  box-shadow: 0px 10px 8px #ccc;
+  position: absolute;
+  top: 10%;
+  right: 5%;
+  width: 110%;
+  display: flex;
+  // height: 70%;
+  // grid-column: 1/-1;
+  padding: 3rem 2rem;
+  background: #f9f9f9;
+  // overflow: scroll;
+}
+.table {
+  min-height: 100%;
+  padding: 1rem;
+  width: 65%;
+  font-size: 16px;
+  table {
+    border: 1px solid #ccc;
+    border-collapse: separate;
+    td {
+      padding: 1rem;
+      text-align: center;
+    }
+  }
+
+  th {
+    font-size: 14px;
+  }
+  // border: 1px solid red;
+}
+
+.action__area{
+  margin: 2rem 0;
+}

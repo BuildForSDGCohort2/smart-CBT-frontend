@@ -1,0 +1,44 @@
+.filled,
+.edit,
+.refresh,
+.delete {
+  background: royalblue;
+  border: 0;
+  padding: 1rem;
+  color: #fff;
+  margin-right: 1rem;
+
+  &:hover {
+    background: rgb(37, 80, 209);
+  }
+
+  cursor: pointer;
+}
+
+
+.edit {
+  background: #1748ce;
+  color: #fff;
+
+  &:hover {
+    background: rgb(37, 80, 209);
+  }
+
+  cursor: pointer;
+}
+
+.refresh {
+  background: rgb(32, 138, 80);
+
+  color: #fff;
+
+  &:hover {
+    background: rgb(37, 80, 209);
+  }
+
+  cursor: pointer;
+}
+
+.delete{
+  background: rgb(145, 22, 22);
+}

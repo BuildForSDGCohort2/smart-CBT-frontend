@@ -3,6 +3,12 @@ import { NavLink } from "react-router-dom";
 import style from "./index.module.scss";
 
 export default function DashboardSideBar() {
+  const [openModal, setModal] = React.useState(false);
+  const handleModal = () => {
+    setModal(!openModal);
+    console.log("clicked")
+  };
+
   const routes = [
     {
       route: "dashboard/admin/teachers",
@@ -11,6 +17,7 @@ export default function DashboardSideBar() {
     {
       route: "dashboard/admin/students",
       name: "Students",
+      method: () => handleModal(),
     },
     {
       route: "dashboard/admin/courses",
@@ -36,10 +43,10 @@ export default function DashboardSideBar() {
   return (
     <div className={style["container"]}>
       <ul>
-        {routes.map((route,index) => {
+        {routes.map((route, index) => {
           return (
-            <li key={10*index}>
-              <NavLink to={route.route}>{route.name}</NavLink>
+            <li key={10 * index}>
+              <NavLink to={route.route} onClick={route.method && route.method}>{route.name}</NavLink>
             </li>
           );
         })}
