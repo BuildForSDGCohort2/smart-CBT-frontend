@@ -46,12 +46,11 @@ export const adminLogin = (formData) => (dispatch) => {
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
-            // 'X-Requested-With': 'XMLHttpRequest',
         }
     }
     const endPoint = endpoints.ADMIN_URL
     axios
-        .post(`${endPoint}/login`, formData, config)
+        .post(`${endPoint}/admin/login`, formData, config)
         .then(res => {
             const token = res.data.token;
             const user = res.data;

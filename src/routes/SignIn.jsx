@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import * as authActions from "../redux/actions/authActions";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import style from "../assets/styles/signin.module.scss";
+import style from "../assets/RouteStyle/signin.module.scss";
 import Button from "../components/ErrorBoundary/Button";
 
 export default function SignIn() {
@@ -20,10 +20,9 @@ export default function SignIn() {
         validationSchema={Yup.object({
           email: Yup.string()
             .max(15, "Must be 15 characters or less")
-            .email("Invalid email address")
+            // .email("Invalid email address")
             .required("Required"),
-          passowrd: Yup.string()
-            .max(20, "Must be 20 characters or less")
+            password: Yup.string()
             .required("Required"),
         })}
         onSubmit={({ email, password }, { setSubmitting }) => {
