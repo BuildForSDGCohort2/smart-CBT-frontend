@@ -51,11 +51,15 @@ $break-point-xxl: 1200px;
 /*** Extends ***/
 
 %body {
-  font-family: "Fira Sans regular";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+;
 }
 
 %h {
-  font-family: "Fira Sans bold";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+;
   font-weight: bold;
 }
 
@@ -89,20 +93,23 @@ $break-point-xxl: 1200px;
 }
 
 %p1 {
-  font-family: "Fira Sans regular";
-  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif ;  font-size: 16px;
   line-height: 30px;
 }
 
 %p2 {
-  font-family: "Fira Sans regular";
-  font-size: 16px;
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif ;  font-size: 16px;
   line-height: 24px;
 }
 
 %p-footer {
-  font-family: "Fira Sans regular";
-  font-size: 12px;
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif ;  font-size: 12px;
   line-height: 18px;
   font-weight: normal;
   color: $blue;
@@ -174,8 +181,9 @@ h2 {
 h3 {
   @extend %h;
   margin: 0;
-  font-family: "Fira Sans medium";
-  font-style: normal;
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif ;  font-style: normal;
   font-weight: bold;
   font-size: 25px;
   line-height: 30px;
@@ -185,8 +193,9 @@ h3 {
 h4 {
   @extend %h;
 
-  font-family: "Fira Sans medium";
-  font-style: normal;
+ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif ;  font-style: normal;
   font-size: 18px;
   line-height: 22px;
   /* identical to box height */

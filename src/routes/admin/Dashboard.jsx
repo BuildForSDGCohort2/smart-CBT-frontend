@@ -1,7 +1,7 @@
 import React from "react";
 import Layout from "../../components/Layout";
 import style from "../../assets/RouteStyle/dashboard.module.scss";
-import Table from "../../components/Table";
+// import Table from "../../components/Table";
 import Students from "../../components/Students";
 
 export default function Dashboard() {

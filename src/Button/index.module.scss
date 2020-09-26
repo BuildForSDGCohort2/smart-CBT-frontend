@@ -17,8 +17,7 @@
 
 
 .edit {
-  background: #1748ce;
-  color: #fff;
+  background: #5877cc;
 
   &:hover {
     background: rgb(37, 80, 209);
@@ -30,10 +29,9 @@
 .refresh {
   background: rgb(32, 138, 80);
 
-  color: #fff;
 
   &:hover {
-    background: rgb(37, 80, 209);
+    background: rgb(28, 128, 73);
   }
 
   cursor: pointer;
@@ -41,4 +39,7 @@
 
 .delete{
   background: rgb(145, 22, 22);
+  &:hover {
+    background: rgb(114, 18, 18);
+  }
 }

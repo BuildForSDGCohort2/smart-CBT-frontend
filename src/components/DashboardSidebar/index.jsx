@@ -11,7 +11,7 @@ export default function DashboardSideBar() {
 
   const routes = [
     {
-      route: "dashboard/admin/teachers",
+      route: "/admin/dashboard",
       name: "Teachers",
     },
     {

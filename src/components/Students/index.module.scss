@@ -10,6 +10,12 @@
   justify-content: space-between;
 }
 
+.student--container,
+.edit__student,
+.del__student {
+  box-shadow: 0px 10px 8px 2px rgb(180, 180, 180);
+}
+
 .form--container,
 .student--container {
   width: 100%;
@@ -36,25 +42,31 @@
   height: fit-content;
   width: 30%;
   label {
-    margin-bottom: 1rem;
+    margin-bottom: 0.4rem;
   }
 
   input {
-    // padding: 0.5rem;
+    padding: 0.2rem;
   }
 }
 
 .form--wrapper,
-.table {
+.table,
+.edit__student,
+.del__student {
   background: $white;
 }
 
-.student--container {
-  box-shadow: 0px 10px 8px #ccc;
+.student--container,
+.edit__student,
+.del__student {
   position: absolute;
-  top: 10%;
+  top: 3%;
   right: 5%;
   width: 110%;
+}
+
+.student--container {
   display: flex;
   // height: 70%;
   // grid-column: 1/-1;
@@ -82,6 +94,28 @@
   // border: 1px solid red;
 }
 
-.action__area{
+.action__area {
   margin: 2rem 0;
+}
+
+// ==============
+
+.edit__student,
+.del__student {
+  width: 50%;
+  top: 5%;
+  left: 15%;
+  z-index: 9;
+  .form--wrapper {
+    width: 100%;
+  }
+  input {
+    width: 100%;
+  }
+}
+
+.del__student {
+  top: 25%;
+  z-index: 10;
+  width: 50%;
 }
