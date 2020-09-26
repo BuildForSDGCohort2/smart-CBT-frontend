@@ -1,0 +1,38 @@
+.form--wrapper,
+.form--container {
+  display: flex;
+}
+
+.form--container {
+  place-content: center;
+  place-items: center;
+  width: 100%;
+}
+
+.form--container {
+  min-height: 100vh;
+}
+
+.form--wrapper {
+  padding: 4rem 2rem;
+}
+
+.error__message {
+  color: red;
+  margin: 0;
+  margin: 1rem 0;
+}
+
+.form--wrapper {
+  flex-direction: column;
+  height: fit-content;
+  width: 50%;
+  box-shadow: 0 10px 20px #ccc;
+  label {
+    margin-bottom: 1rem;
+  }
+
+  input {
+    padding: 0.5rem;
+  }
+}

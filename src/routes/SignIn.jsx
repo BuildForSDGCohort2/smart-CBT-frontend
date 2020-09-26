@@ -1,18 +1,62 @@
-import React from 'react'
-import { useDispatch } from 'react-redux'
-import * as actiontypes from "../redux/actions/authActions";
+import React from "react";
+import { useDispatch } from "react-redux";
+import * as authActions from "../redux/actions/authActions";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import style from "../assets/styles/signin.module.scss";
+import Button from "../components/ErrorBoundary/Button";
 
 export default function SignIn() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    React.useEffect(()=>{
+  React.useEffect(() => {
+    // dispatch(authActions.adminLogin());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return (
+    <div className={style["form--container"]}>
+      <Formik
+        initialValues={{ firstName: "", lastName: "", email: "" }}
+        validationSchema={Yup.object({
+          email: Yup.string()
+            .max(15, "Must be 15 characters or less")
+            .email("Invalid email address")
+            .required("Required"),
+          passowrd: Yup.string()
+            .max(20, "Must be 20 characters or less")
+            .required("Required"),
+        })}
+        onSubmit={({ email, password }, { setSubmitting }) => {
+          const formData = new FormData();
 
-    },[])
-    return (
-        <div>
-            <form>
+          formData.append("email", email);
+          formData.append("password", password);
 
-            </form>
-        </div>
-    )
+          dispatch(authActions.adminLogin(formData));
+        }}
+      >
+        <Form className={style["form--wrapper"]}>
+          <label htmlFor="email">Email</label>
+
+          <Field name="email" type="email" />
+
+          <div className={style["error__message"]}>
+            <ErrorMessage name="email" />
+          </div>
+
+          <label htmlFor="password">Password</label>
+
+          <Field name="password" type="password" />
+
+          <div className={style["error__message"]}>
+            <ErrorMessage name="password" />
+          </div>
+          <Button type="submit" className="filled">
+            Submit
+          </Button>
+          {/* <button type="submit">Submit</button> */}
+        </Form>
+      </Formik>
+    </div>
+  );
 }
