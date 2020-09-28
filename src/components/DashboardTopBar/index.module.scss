@@ -1,0 +1,33 @@
+.topbar {
+  display: flex;
+  background-color: #fff;
+}
+
+.topbar {
+    box-shadow: 0px 10px 8px rgb(228, 228, 228);
+  justify-content: space-between;
+  flex-direction: row;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  div {
+    width: 20%;
+  }
+
+  span {
+    display: inline-block;
+    padding: 1rem;
+
+    // border: 1px solid black;
+  }
+}
+
+.user__toolbar {
+  span {
+      width: 20%;
+    &:first-child {
+      border-right: 1px solid #ccc;
+    }
+  }
+}

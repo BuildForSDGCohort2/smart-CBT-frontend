@@ -50,14 +50,16 @@
 .courses,
 .questions {
   display: flex;
-  justify-content: space-between;
   span {
     // border: 1px solid red;
     padding: 0 1rem;
     display: inline-block;
-    border: 1px solid grey;
-    width: 45%;
+    border-right: 1px solid white;
+    width: 50%;
 
+    &:last-child {
+      border-right: 0;
+    }
   }
 }
 
