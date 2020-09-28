@@ -3,6 +3,7 @@ import Layout from "../../components/Layout";
 import style from "../../assets/RouteStyle/dashboard.module.scss";
 // import Table from "../../components/Table";
 import Students from "../../components/Students";
+import Table from "../../components/Table";
 
 export default function Dashboard() {
   const topSection = [
@@ -27,6 +28,16 @@ export default function Dashboard() {
       amt: "70000",
     },
   ];
+
+  const tableHead = ["Name", "Course", "Location"];
+
+  
+  const tablebody = [
+    { name: "ade", course: "mhs 600", location: "Lagos" },
+    { name: "basit", course: "mhs 600", location: "abuja" },
+    { name: "josh", course: "mhs 702", location: "jos" },
+  ];
+
   return (
     <Layout>
       <div className={style["user__stats"]}>
@@ -43,8 +54,11 @@ export default function Dashboard() {
           );
         })}
       </div>
-      {/* <Table/> */}
-        <Students/>
+
+      {/* Tbody takes an array of key value pairs, key = table name and value = table data */}
+      
+      <Table thead={tableHead} tbody={tablebody} />
+      {/* <Students /> */}
     </Layout>
   );
 }

@@ -3,16 +3,17 @@
 .container {
   display: flex;
   min-height: 100vh;
-  background-color: $ash ;
+  background-color: $ash;
 
   main {
     // border: 1px solid red;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(5, 1fr);
+    position: relative;
+    gap: 1rem;
     padding: 1rem;
     width: 100%;
-    position: relative;
   }
   // height: 100vh;
 }

@@ -1,75 +1,41 @@
 import React from "react";
+import style from './index.module.scss'
 
-export default function Table(thead, tbody) {
-  const tableHead = [
-    {
-      label: "Name",
-    },
-    {
-      label: "Course",
-    },
-    {
-      label: "Location",
-    },
-  ];
+export default function Table({ thead, tbody }) {
 
-  //Table takes a body with array of values
-  //A user passes an array and then it's pushed to tbody.
+  /* Tbody accepts an array of key value pairs, key = table name and value = table data */
+  /* thead accepts an array of table Names */
 
-  const tableBody = [
-    {
-      value: ["david kosiso", "MHS 500", "awka kosiso"],
-    },
-    {
-      value: ["david kosiso", "MHS 500", "awka kosiso"],
-    },
-    {
-      value: ["david kosiso", "MHS 500", "awka kosiso"],
-    },
-  ];
+  let th = thead ? thead : "";
+  let td = tbody ? tbody : "";
 
-  const tableBody1 = [];
+  const createData = (column) => {
+    return column;
+  };
+  const tableBody = [];
 
-  //   thead.forEach((item) => {
-  //     tableHead.push({label:item.tableHead});
-  //   });
-
-  const testdata = [
-    {
-      value: ["a", "b", "c"],
-    },
-    {
-      value: ["d", "e", "f"],
-    },
-    {
-      value: ["i", "j", "k"],
-    },
-  ];
-
-  testdata.forEach((item) => {
-    //  a users passes [kosiso, mathew, james]
-    console.log(item)
-    tableBody1.push({ value: testdata });
-  });
-
-  console.log("tableBody1", tableBody1);
+  td &&
+    td.forEach((item, index) => {
+      tableBody.push(createData(item));
+    });
 
   return (
-    <div>
+    <div className={style["table"]}>
       <table>
         <thead>
           <tr>
-            {tableHead.map((item, index) => {
-              return <th key={10 * index}>{item.label}</th>;
-            })}
+            {th &&
+              th.map((item, index) => {
+                return <th key={10 * index}>{item}</th>;
+              })}
           </tr>
         </thead>
         <tbody>
-          {tableBody1.map((item) => {
+          {tableBody.map((tbody, index) => {
             return (
-              <tr>
-                {item.value.map((td, index) => {
-                //   return <td>{console.log(td.value[index])}</td>;
+              <tr key={index * 11}>
+                {th.map((item, index) => {
+                  return <td key={index}>{tbody[item.toLowerCase()]}</td>;
                 })}
               </tr>
             );
