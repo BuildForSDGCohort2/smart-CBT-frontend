@@ -5,6 +5,8 @@
   flex-direction: column;
   height: 100vh;
   padding: 0 1rem;
+  position: fixed;
+  z-index: 2;
 }
 .container {
   width: 350px;

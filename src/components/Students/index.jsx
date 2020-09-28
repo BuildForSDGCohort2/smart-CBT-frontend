@@ -4,50 +4,39 @@ import React from "react";
 // import * as Yup from "yup";
 // import * as studentActions from "../../redux/actions/studentActions";
 import Button from "../../Button";
+import useTable from "../Table";
 import style from "./index.module.scss";
+import PropTypes from "prop-types";
+import { inputInfo } from "../../utils/baseInput";
 
 export default function Students() {
+  const tableHead = ["Teacher ID", "First Name", "Last Name", "Email"];
+  const keys = ["teacherId", "firstName", "lastName", "email"];
+
+  const tableBody = [
+    {
+      teacherId: 123,
+      firstName: "Ade",
+      lastName: "yusuf",
+      email: "hdhd",
+    },
+  ];
+
+  const Table = useTable(tableHead, tableBody, keys);
+  const RegisteredStudentsTable = useTable(tableHead, tableBody, keys);
+  const UploadedCoursesTable = useTable(tableHead, tableBody, keys);
+
   const [editStudentOpen, setEditOpen] = React.useState(false);
   const [deleteStudentOpen, setDelOpen] = React.useState(false);
 
   const handleEdit = () => {
-    console.log("clicked");
     setEditOpen(!editStudentOpen);
   };
 
   const handleDelete = () => {
-    console.log("clicked");
     setDelOpen(!deleteStudentOpen);
   };
   // const dispatch = useDispatch();
-
-  const inputInfo = [
-    {
-      htmlFor: "First Name",
-      name: "firstName",
-      type: "text",
-    },
-    {
-      htmlFor: "Last Name",
-      name: "lastName",
-      type: "text",
-    },
-    {
-      htmlFor: "Phone",
-      name: "phone",
-      type: "text",
-    },
-    {
-      htmlFor: "Course Code",
-      name: "courseCode",
-      type: "number",
-    },
-    {
-      htmlFor: "Email",
-      name: "email",
-      type: "email",
-    },
-  ];
 
   return (
     <>
@@ -66,7 +55,6 @@ export default function Students() {
             const formData = new FormData();
 
             inputInfo.forEach((item, index) => {
-              console.log("values", Object.values(values[index]));
               return formData.append(
                 `${item.name}`,
                 Object.values(values[index])
@@ -97,46 +85,12 @@ export default function Students() {
           </Form>
         </Formik>
         {/* </div> */}
+
+        {/* <Table tableHead={tableHead} tableBody={tableBody} keys={null} /> */}
+
         <div className={style["table"]}>
-          <table>
-            <thead>
-              <tr>
-                {" "}
-                <th>Student ID</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Phone Number</th>
-                <th>Course Code</th>
-                <th>Email</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>678MS2</td>
-                <td>Tobi</td>
-                <td>Daniel</td>
-                <td>08123456789</td>
-                <td>222</td>
-                <td>Tobi Daniel@rocketmail</td>
-              </tr>
-              <tr>
-                <td>678MS2</td>
-                <td>Tobi</td>
-                <td>Daniel</td>
-                <td>08123456789</td>
-                <td>222</td>
-                <td>Tobi Daniel@rocketmail</td>
-              </tr>
-              <tr>
-                <td>678MS2</td>
-                <td>Tobi</td>
-                <td>Daniel</td>
-                <td>08123456789</td>
-                <td>222</td>
-                <td>Tobi Daniel@rocketmail</td>
-              </tr>
-            </tbody>
-          </table>
+          {Table}
+
           <div className={style["action__area"]}>
             <Button type="button" className="refresh">
               Refresh
@@ -159,6 +113,23 @@ export default function Students() {
     </>
   );
 }
+
+const SelectCourseCode = () => {
+  return (
+    <div>
+      <header>
+        <h3>Select course code</h3>
+      </header>
+
+      <label htmlFor="selectCourse"></label>
+      <select name="" id="selectCourse">
+        <option value="MME401">MME401</option>
+        <option value="MDE401">MDE401</option>
+        <option value="MMQ401">MMQ401</option>
+      </select>
+    </div>
+  );
+};
 
 const EditStudent = ({ inputInfo }) => {
   console.log(inputInfo);
@@ -228,7 +199,6 @@ const DeleteStudent = () => {
         // })}
         onSubmit={(values, { setSubmitting }) => {
           // const formData = new FormData();
-
           // dispatch(studentActions.addStudent(formData));
         }}
       >
@@ -252,4 +222,11 @@ const DeleteStudent = () => {
       </Formik>
     </div>
   );
+};
+
+
+
+Students.propTypes = {
+  EditStudent: PropTypes.isRequired,
+  DeleteStudent: PropTypes.isRequired,
 };

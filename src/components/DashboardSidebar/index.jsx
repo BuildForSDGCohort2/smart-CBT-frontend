@@ -4,10 +4,19 @@ import style from "./index.module.scss";
 
 export default function DashboardSideBar() {
   const [openModal, setModal] = React.useState(false);
-  const handleModal = () => {
-    setModal(!openModal);
-    console.log("clicked")
+  const [clickState, setClickState] = React.useState({
+    teachers: false,
+    student: false,
+    upload: false,
+    view: false,
+    account: false,
+  });
+  const handleModal = (e) => {
+    setModal({...clickState, [e.target.name]:!e.target.name})
+    // console.log("clicked", [e.target.name]);
   };
+
+  console.log(clickState)
 
   const routes = [
     {
@@ -15,24 +24,19 @@ export default function DashboardSideBar() {
       name: "Teachers",
     },
     {
-      route: "dashboard/admin/students",
-      name: "Students",
-      method: () => handleModal(),
-    },
-    {
-      route: "dashboard/admin/courses",
+      route: "dashboard/courses",
       name: "Courses",
     },
     {
-      route: "dashboard/admin/upload_question",
+      route: "dashboard/upload_question",
       name: "Upload Questions",
     },
     {
-      route: "dashboard/admin/view_questions",
+      route: "dashboard/view_questions",
       name: "View Questions",
     },
     {
-      route: "dashboard/admin/account",
+      route: "dashboard/account",
       name: "Account",
     },
     {
@@ -43,13 +47,13 @@ export default function DashboardSideBar() {
   return (
     <div className={style["container"]}>
       <ul>
-        {routes.map((route, index) => {
-          return (
-            <li key={10 * index}>
-              <NavLink to={route.route} onClick={route.method && route.method}>{route.name}</NavLink>
-            </li>
-          );
-        })}
+        <li>Teachers</li>
+        <li onClick={handleModal} name="student">Students</li>
+        <li>Courses</li>
+        <li>Upload Questions</li>
+        <li>View Questions</li>
+        <li>Account</li>
+        <li>Logout</li>
       </ul>
     </div>
   );

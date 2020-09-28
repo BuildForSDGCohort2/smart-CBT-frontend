@@ -60,10 +60,10 @@
 .student--container,
 .edit__student,
 .del__student {
-  position: absolute;
+  position: fixed;
   top: 3%;
   right: 5%;
-  width: 110%;
+  width: 90%;
 }
 
 .student--container {
@@ -72,30 +72,17 @@
   // grid-column: 1/-1;
   padding: 3rem 2rem;
   background: #f9f9f9;
-  // overflow: scroll;
+  z-index: 2;
 }
 .table {
-  min-height: 100%;
+  border: 1px solid #ccc;
+  width: 70%;
   padding: 1rem;
-  width: 65%;
-  font-size: 16px;
-  table {
-    border: 1px solid #ccc;
-    border-collapse: separate;
-    td {
-      padding: 1rem;
-      text-align: center;
-    }
-  }
-
-  th {
-    font-size: 14px;
-  }
-  // border: 1px solid red;
 }
 
 .action__area {
   margin: 2rem 0;
+  position: relative;
 }
 
 // ==============
@@ -104,7 +91,7 @@
 .del__student {
   width: 50%;
   top: 5%;
-  left: 15%;
+  left: 30%;
   z-index: 9;
   .form--wrapper {
     width: 100%;
