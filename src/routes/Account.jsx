@@ -6,51 +6,65 @@ import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import Button from "../components/Button";
 import Layout from "../components/Layout";
+import "../assets/RouteStyle/base.scss";
 
 export default function Account() {
   const dispatch = useDispatch();
   return (
     <Layout>
-    <Formik
-      initialValues={{ firstName: "", lastName: "", email: "" }}
-      validationSchema={Yup.object({
-        email: Yup.string()
-          .max(15, "Must be 15 characters or less")
-          // .email("Invalid email address")
-          .required("Required"),
-        password: Yup.string().required("Required"),
-      })}
-      onSubmit={({ email, password }, { setSubmitting }) => {
-        const formData = new FormData();
 
-        formData.append("email", email);
-        formData.append("password", password);
+      <Formik
+        initialValues={{ firstName: "", lastName: "", email: "" }}
+        validationSchema={Yup.object({
+          oldPassword: Yup.string().required("Required"),
+          newPassword: Yup.string().required("Required"),
+          confirmPassword: Yup.string().required("Required"),
+        })}
+        onSubmit={(
+          { oldPassword, newPassword, confirmPassword },
+          { setSubmitting }
+        ) => {
+          const formData = new FormData();
 
-        // dispatch(authActions.adminLogin(formData));
-      }}
-    >
-      <Form className={style["form--wrapper"]}>
-        <label htmlFor="email">Email</label>
+          formData.append("oldPassword", oldPassword);
+          formData.append("newPassword", newPassword);
+          formData.append("confirmPassword", confirmPassword);
 
-        <Field name="email" type="email" />
+          // dispatch(authActions.adminLogin(formData));
+        }}
+      >
+        <Form className={"form--wrapper"}>
+          <header>
+            <h3>Profile</h3>
+          </header>
+          <label htmlFor="oldPassword">Old Password</label>
 
-        <div className={style["error__message"]}>
-          <ErrorMessage name="email" />
-        </div>
+          <Field name="oldPassword" type="oldPassword" />
 
-        <label htmlFor="password">Password</label>
+          <div className={"error__message"}>
+            <ErrorMessage name="oldPassword" />
+          </div>
 
-        <Field name="password" type="password" />
+          <label htmlFor="newPassword">New Password</label>
 
-        <div className={style["error__message"]}>
-          <ErrorMessage name="password" />
-        </div>
-        <Button type="submit" className="filled">
-          Submit
-        </Button>
-        {/* <button type="submit">Submit</button> */}
-      </Form>
-    </Formik>
+          <Field name="newPassword" type="newPassword" />
+
+          <div className={"error__message"}>
+            <ErrorMessage name="newPassword" />
+          </div>
+          <label htmlFor="confirmPassword">Confirm Password</label>
+
+          <Field name="confirmPassword" type="confirmPassword" />
+          <div className={"error__message"}>
+            <ErrorMessage name="newPassword" />
+          </div>
+         
+          <Button type="submit" className="filled">
+            Submit
+          </Button>
+          {/* <button type="submit">Submit</button> */}
+        </Form>
+      </Formik>
     </Layout>
   );
 }

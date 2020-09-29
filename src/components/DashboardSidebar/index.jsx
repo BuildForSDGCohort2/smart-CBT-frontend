@@ -3,10 +3,7 @@ import { NavLink } from "react-router-dom";
 // import { NavLink } from "react-router-dom";
 import style from "./index.module.scss";
 
-export default function DashboardSideBar({route}) {
-  const [openModal, setModal] = React.useState(false);
-
-
+export default function useDashboardSideBar() {
   const routes = [
     {
       route: "/admin/dashboard",
@@ -29,7 +26,7 @@ export default function DashboardSideBar({route}) {
       name: "Account",
     },
     {
-      route: "/",
+      route: "/Logout",
       name: "Logout",
     },
   ];
@@ -38,10 +35,9 @@ export default function DashboardSideBar({route}) {
       <ul>
         {routes.map((route) => (
           <li>
-            <NavLink to={route.route}>{route.name}</NavLink>
+            <NavLink activeClassName={style["active"]} to={route.route}>{route.name}</NavLink>
           </li>
         ))}
-        
       </ul>
     </div>
   );

@@ -1,11 +1,10 @@
 import React from "react";
-import Layout from "../components/Layout";
-import style from "../assets/RouteStyle/dashboard.module.scss";
+import Layout from "../../components/Layout";
+import style from "../../assets/RouteStyle/dashboard.module.scss";
 // import Table from "../../components/Table";
-import DashboardTables from "../components/StudentComp";
-import * as studentActions from "../redux/actions/studentActions";
+import * as studentActions from "../../redux/actions/studentActions";
 
-import useTable from "../components/Table";
+import useTable from "../../components/Table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSync,
@@ -22,7 +21,7 @@ export default function Dashboard() {
   const topSection = [
     {
       icon: <FontAwesomeIcon icon={faUsers} />,
-      name: "Teachers",
+      name: "Results",
       amt: "70000",
     },
     {
@@ -99,7 +98,7 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <Layout>
+    <Layout user="lecturer">
       <div className={style["user__stats"]}>
         {topSection.map((item, index) => {
           return (

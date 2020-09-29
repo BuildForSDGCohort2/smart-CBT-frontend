@@ -24,8 +24,7 @@
 }
 
 .student--container,
-.edit__student,
-.del__student,
+.edit__student,.del__student,
 .select__course {
   box-shadow: 0px 10px 8px 2px rgb(226, 226, 226);
 }
@@ -48,7 +47,8 @@
 }
 
 .form--wrapper {
-  padding: 1rem 2rem;
+  padding: 1rem;
+  box-shadow: none;
 }
 
 .error__message {
@@ -59,7 +59,7 @@
 
 .form--wrapper {
   height: fit-content;
-  width: 30%;
+  width: 40%;
   label {
     margin-bottom: 0.4rem;
   }
@@ -70,7 +70,6 @@
 }
 
 .form--wrapper,
-.table,
 .edit__student,
 .del__student,
 .select__course {
@@ -107,23 +106,25 @@
 
 .edit__student,
 .del__student {
-  // position: fixed;
   top: 10%;
   right: 5%;
+  padding: 1.5rem;
   // width: 100%;
   grid-column: 1/-1;
 }
 
 .student--container {
   display: flex;
+  justify-content: space-evenly;
   grid-column: 1/-1;
-  // height: 90%;
-  padding: 1rem 2rem;
+  height: 85%;
+  // padding: 1rem 2rem;
   background: #f9f9f9;
   z-index: 2;
 }
 .table {
   // border: 1px solid #ccc;
+  height: 80%;
   width: 70%;
   padding: 1rem;
 }
@@ -135,11 +136,14 @@
 
 // ==============
 .edit__student {
-  height: 80%;
+  height: 85%;
   overflow: scroll;
+  position: relative;
+
 }
 .edit__student,
 .del__student {
+  
   header {
     align-items: center;
   }

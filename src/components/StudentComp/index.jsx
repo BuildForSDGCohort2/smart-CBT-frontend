@@ -97,6 +97,10 @@ export default function StudentComp() {
           }}
         >
           <Form className={style["form--wrapper"]}>
+          <header>
+            <h4>Add Student</h4>
+            {/* <FontAwesomeIcon icon={faTimes} onClick={handleEdit} className={style["fa"]}/> */}
+          </header>
             {inputInfo.map((item) => {
               return (
                 <>
