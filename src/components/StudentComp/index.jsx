@@ -120,7 +120,7 @@ export default function StudentComp() {
         </Formik>
 
         <div className={style["table"]}>
-          {Table}
+          { !selectCourse.selectCourse && Table}
 
           <div className={style["action__area"]}>
             <Button type="button" className="refresh">

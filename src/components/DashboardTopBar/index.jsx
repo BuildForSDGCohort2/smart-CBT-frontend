@@ -7,7 +7,7 @@ export default function DashboardTopBar() {
   return (
     <section className={style["topbar"]}>
       <div>
-        <span>Welcome {"Admin"}</span>
+        <span>Welcome </span>
       </div>
       <div className={style["user__toolbar"]}>
         <span>

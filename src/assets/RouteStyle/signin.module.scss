@@ -11,10 +11,13 @@
 
 .form--container {
   min-height: 100vh;
+  background-color: rgb(227, 227, 245);
 }
 
 .form--wrapper {
   padding: 4rem 2rem;
+  background-color: #ffffff;
+
 }
 
 .error__message {
@@ -27,7 +30,7 @@
   flex-direction: column;
   height: fit-content;
   width: 50%;
-  box-shadow: 0 10px 20px #ccc;
+  box-shadow: 0 10px 20px rgb(161, 161, 161);
   label {
     margin-bottom: 1rem;
   }

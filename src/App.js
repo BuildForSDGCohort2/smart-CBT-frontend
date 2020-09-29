@@ -21,6 +21,7 @@ export default function app() {
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <Route exact path="/" component={SignIn} />
+          <Route exact path="/Logout" component={SignIn} />
           <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
           <AdminRoute exact path="/admin/account" component={Account} />
           <AdminRoute exact path="/admin/upload_question" component={UploadQuestion} />
