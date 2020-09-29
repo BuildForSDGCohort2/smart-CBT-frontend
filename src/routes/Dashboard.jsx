@@ -1,11 +1,11 @@
 import React from "react";
-import Layout from "../../components/Layout";
-import style from "../../assets/RouteStyle/dashboard.module.scss";
+import Layout from "../components/Layout";
+import style from "../assets/RouteStyle/dashboard.module.scss";
 // import Table from "../../components/Table";
-import DashboardTables from "../../components/DashboardTables";
-import * as studentActions from "../../redux/actions/studentActions";
+import DashboardTables from "../components/DashboardTables";
+import * as studentActions from "../redux/actions/studentActions";
 
-import useTable from "../../components/Table";
+import useTable from "../components/Table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSync,

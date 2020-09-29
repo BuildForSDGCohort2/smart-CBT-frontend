@@ -60,17 +60,18 @@
 .student--container,
 .edit__student,
 .del__student {
-  position: fixed;
-  top: 3%;
+  // position: fixed;
+  top: 10%;
   right: 5%;
-  width: 90%;
+  // width: 100%;
+  grid-column: 1/-1;
 }
 
 .student--container {
   display: flex;
   // height: 70%;
   // grid-column: 1/-1;
-  padding: 3rem 2rem;
+  padding: 1rem 2rem;
   background: #f9f9f9;
   z-index: 2;
 }
@@ -89,9 +90,10 @@
 
 .edit__student,
 .del__student {
+  position: fixed;
   width: 50%;
-  top: 5%;
-  left: 30%;
+  top: 10%;
+  left: 35%;
   z-index: 9;
   .form--wrapper {
     width: 100%;

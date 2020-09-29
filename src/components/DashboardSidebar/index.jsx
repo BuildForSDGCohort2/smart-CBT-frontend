@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import style from "./index.module.scss";
 
 export default function DashboardSideBar() {
@@ -12,11 +13,11 @@ export default function DashboardSideBar() {
     account: false,
   });
   const handleModal = (e) => {
-    setModal({...clickState, [e.target.name]:!e.target.name})
+    setModal({ ...clickState, [e.target.name]: !e.target.name });
     // console.log("clicked", [e.target.name]);
   };
 
-  console.log(clickState)
+  console.log(clickState);
 
   const routes = [
     {
@@ -24,8 +25,8 @@ export default function DashboardSideBar() {
       name: "Teachers",
     },
     {
-      route: "dashboard/courses",
-      name: "Courses",
+      route: "/admin/student",
+      name: "Students",
     },
     {
       route: "dashboard/upload_question",
@@ -36,7 +37,7 @@ export default function DashboardSideBar() {
       name: "View Questions",
     },
     {
-      route: "dashboard/account",
+      route: "/admin/account",
       name: "Account",
     },
     {
@@ -47,13 +48,12 @@ export default function DashboardSideBar() {
   return (
     <div className={style["container"]}>
       <ul>
-        <li>Teachers</li>
-        <li onClick={handleModal} name="student">Students</li>
-        {/* <li>Courses</li> */}
-        <li>Upload Questions</li>
-        <li>View Questions</li>
-        <li>Account</li>
-        <li>Logout</li>
+        {routes.map((route) => (
+          <li>
+            <NavLink to={route.route}>{route.name}</NavLink>
+          </li>
+        ))}
+        
       </ul>
     </div>
   );

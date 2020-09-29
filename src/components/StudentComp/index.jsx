@@ -2,7 +2,6 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 // import { useDispatch } from "react-redux";
 // import * as Yup from "yup";
-import * as studentActions from "../../redux/actions/studentActions";
 import Button from "../Button";
 import useTable from "../Table";
 import style from "./index.module.scss";
@@ -10,15 +9,31 @@ import PropTypes from "prop-types";
 import { inputInfo } from "../../utils/baseInput";
 // import { useDispatch, useSelector } from "react-redux";
 
-export default function DashboardTables() {
-  const tableHead = ["Teacher ID", "First Name", "Last Name", "Email"];
-  const keys = ["teacherId", "firstName", "lastName", "email"];
+export default function StudentComp() {
+  const tableHead = [
+    "Student ID",
+    "First Name",
+    "Last Name",
+    "Phone Number",
+    "Course Code",
+    "Email",
+  ];
+  const keys = [
+    "studentId",
+    "firstName",
+    "lastName",
+    "phoneNum",
+    "courseCode",
+    "email",
+  ];
 
   const tableBody = [
     {
-      teacherId: 123,
+      studentId: 123,
       firstName: "Ade",
       lastName: "yusuf",
+      phoneNum: "hdhd",
+      courseCode: "hdhd",
       email: "hdhd",
     },
   ];
@@ -37,7 +52,6 @@ export default function DashboardTables() {
   const handleDelete = () => {
     setDelOpen(!deleteStudentOpen);
   };
- 
 
   return (
     <>
@@ -85,9 +99,6 @@ export default function DashboardTables() {
             {/* <button type="submit">Submit</button> */}
           </Form>
         </Formik>
-        {/* </div> */}
-
-        {/* <Table tableHead={tableHead} tableBody={tableBody} keys={null} /> */}
 
         <div className={style["table"]}>
           {Table}
@@ -225,7 +236,7 @@ const DeleteStudent = () => {
   );
 };
 
-DashboardTables.propTypes = {
+StudentComp.propTypes = {
   EditStudent: PropTypes.isRequired,
   DeleteStudent: PropTypes.isRequired,
 };

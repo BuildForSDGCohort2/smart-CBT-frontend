@@ -7,8 +7,9 @@ import {
 import ProtectedRoutes from './components/ProtectedRoute';
 import SignIn from './routes/admin/SignIn'
 // const Upload = React.lazy(() => import('./routes/Upload'));
-const Dashboard = React.lazy(() => import('./routes/admin/Dashboard'));
-const Account = React.lazy(() => import('./routes/admin/Account'));
+const Dashboard = React.lazy(() => import('./routes/Dashboard'));
+const Account = React.lazy(() => import('./routes/Account'));
+const Student = React.lazy(() => import('./routes/admin/Students'));
 
 export default function app() {
   return (
@@ -18,6 +19,7 @@ export default function app() {
           <Route exact path="/" component={SignIn} />
           <ProtectedRoutes exact path="/admin/dashboard" component={Dashboard} />
           <ProtectedRoutes exact path="/admin/account" component={Account} />
+          <ProtectedRoutes exact path="/admin/student" component={Student} />
 
         </Switch>
       </Suspense>
