@@ -53,11 +53,21 @@
 .form--wrapper,
 .table,
 .edit__student,
-.del__student {
+.del__student,
+.select__course {
   background: $white;
 }
 
-.student--container,
+.select__course {
+  position: absolute;
+  height: 300px;
+  left: 30%;
+  top: 30%;
+  width: 50%;
+  border: 1px solid black;
+  z-index: 3;
+}
+
 .edit__student,
 .del__student {
   // position: fixed;
@@ -69,8 +79,7 @@
 
 .student--container {
   display: flex;
-  // height: 70%;
-  // grid-column: 1/-1;
+  grid-column: 1/-1;
   padding: 1rem 2rem;
   background: #f9f9f9;
   z-index: 2;

@@ -29,11 +29,11 @@ export default function DashboardSideBar() {
       name: "Students",
     },
     {
-      route: "dashboard/upload_question",
+      route: "/admin/upload_question",
       name: "Upload Questions",
     },
     {
-      route: "dashboard/view_questions",
+      route: "/admin/view_questions",
       name: "View Questions",
     },
     {

@@ -9,6 +9,8 @@ import SignIn from './routes/admin/SignIn'
 // const Upload = React.lazy(() => import('./routes/Upload'));
 const Dashboard = React.lazy(() => import('./routes/Dashboard'));
 const Account = React.lazy(() => import('./routes/Account'));
+const UploadQuestion = React.lazy(() => import('./routes/UploadQuestion'));
+const ViewQuestion = React.lazy(() => import('./routes/ViewQuestions'));
 const Student = React.lazy(() => import('./routes/admin/Students'));
 
 export default function app() {
@@ -19,6 +21,8 @@ export default function app() {
           <Route exact path="/" component={SignIn} />
           <ProtectedRoutes exact path="/admin/dashboard" component={Dashboard} />
           <ProtectedRoutes exact path="/admin/account" component={Account} />
+          <ProtectedRoutes exact path="/admin/upload_question" component={UploadQuestion} />
+          <ProtectedRoutes exact path="/admin/view_questions" component={ViewQuestion} />
           <ProtectedRoutes exact path="/admin/student" component={Student} />
 
         </Switch>

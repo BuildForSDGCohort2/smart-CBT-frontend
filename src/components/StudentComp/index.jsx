@@ -5,11 +5,16 @@ import React from "react";
 import Button from "../Button";
 import useTable from "../Table";
 import style from "./index.module.scss";
+import * as studentActions from "../../redux/actions/studentActions";
 import PropTypes from "prop-types";
 import { inputInfo } from "../../utils/baseInput";
+import { useDispatch } from "react-redux";
 // import { useDispatch, useSelector } from "react-redux";
 
 export default function StudentComp() {
+  const dispatch = useDispatch();
+  const [selectCourse, setCourse] = React.useState(false);
+
   const tableHead = [
     "Student ID",
     "First Name",
@@ -52,6 +57,13 @@ export default function StudentComp() {
   const handleDelete = () => {
     setDelOpen(!deleteStudentOpen);
   };
+
+  React.useEffect(() => {
+    setCourse(true);
+    return () => {
+      setCourse(false);
+    };
+  }, []);
 
   return (
     <>
@@ -119,6 +131,8 @@ export default function StudentComp() {
             </Button>
           </div>
         </div>
+        {SelectCourseCode && <SelectCourseCode />}
+
       </div>
       {editStudentOpen && <EditStudent inputInfo={inputInfo} />}
       {deleteStudentOpen && <DeleteStudent />}
@@ -128,7 +142,7 @@ export default function StudentComp() {
 
 const SelectCourseCode = () => {
   return (
-    <div>
+    <div className={style['select__course']}>
       <header>
         <h3>Select course code</h3>
       </header>

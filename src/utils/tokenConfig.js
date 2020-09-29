@@ -1,10 +1,9 @@
 // import moment from 'moment';
 
 export const finishAuthentication = (token, userData, expires_at) => {
-    sessionStorage.setItem('nguvu_jwt', token);
-    sessionStorage.setItem('nguvu_user_data', JSON.stringify(userData));
-    localStorage.setItem("checked", JSON.stringify(userData.anonymity))
-    // sessionStorage.setItem('nguvu_jwt_expire', JSON.stringify(expires_at));
+    sessionStorage.setItem('smart-cbt', token);
+    sessionStorage.setItem('smart-cbt_user_data', JSON.stringify(userData));
+    // sessionStorage.setItem('smart-cbt_expire', JSON.stringify(expires_at));
     // console.log(userData)
     // sessionStorage.setItem('access_token', token);
     // sessionStorage.setItem('id', userData.id);
@@ -13,14 +12,14 @@ export const finishAuthentication = (token, userData, expires_at) => {
 };
 
 export const getToken = () => {
-    let token = sessionStorage.getItem('nguvu_jwt');
+    let token = sessionStorage.getItem('smart-cbt');
     if (token) {
         return token;
     }
     return null;
 };
 // export const getToken = () => {
-//     let token = sessionStorage.getItem('nguvu_jwt');
+//     let token = sessionStorage.getItem('smart-cbt');
 //     if (token && !isSessionExpired()) {
 //         return token;
 //     }
@@ -40,12 +39,12 @@ export const updateUserData = (userData) => {
 }
 
 export const deleteToken = () => {
-    sessionStorage.removeItem('nguvu_jwt');
+    sessionStorage.removeItem('smart-cbt');
     sessionStorage.removeItem('nguvu_user_data');
 };
 
 // export const isSessionExpired = () => {
-//     const jwt = sessionStorage.getItem('nguvu_jwt_expire');
+//     const jwt = sessionStorage.getItem('smart-cbt_expire');
 //     if (!jwt) {
 //         return true;
 //     } else {
