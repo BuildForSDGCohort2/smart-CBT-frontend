@@ -16,7 +16,6 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
 export default function StudentComp() {
   const dispatch = useDispatch();
-  const [selectCourse, setCourse] = React.useState(false);
 
   const tableHead = [
     "Student ID",
@@ -47,9 +46,8 @@ export default function StudentComp() {
   ];
 
   const Table = useTable(tableHead, tableBody, keys);
-  // const RegisteredStudentsTable = useTable(tableHead, tableBody, keys);
-  // const UploadedCoursesTable = useTable(tableHead, tableBody, keys);
 
+  const [selectCourse, setCourse] = React.useState({ selectCourse: false });
   const [editStudentOpen, setEditOpen] = React.useState(false);
   const [deleteStudentOpen, setDelOpen] = React.useState(false);
 
@@ -60,14 +58,14 @@ export default function StudentComp() {
   const handleDelete = () => {
     setDelOpen(!deleteStudentOpen);
   };
+  const handleCourseModal = () => {
+    setCourse({ ...selectCourse, selectCourse: !selectCourse.selectCourse });
+  };
 
   React.useEffect(() => {
-    dispatch(examActions.getAllExams());
+    // dispatch(examActions.getAllExams());
 
-    setCourse(true);
-    return () => {
-      setCourse(false);
-    };
+    setCourse({ ...selectCourse, selectCourse: true });
   }, []);
 
   return (
@@ -97,10 +95,10 @@ export default function StudentComp() {
           }}
         >
           <Form className={style["form--wrapper"]}>
-          <header>
-            <h4>Add Student</h4>
-            {/* <FontAwesomeIcon icon={faTimes} onClick={handleEdit} className={style["fa"]}/> */}
-          </header>
+            <header>
+              <h4>Add Student</h4>
+              {/* <FontAwesomeIcon icon={faTimes} onClick={handleEdit} className={style["fa"]}/> */}
+            </header>
             {inputInfo.map((item) => {
               return (
                 <>
@@ -140,7 +138,9 @@ export default function StudentComp() {
             </Button>
           </div>
         </div>
-        {/* {SelectCourseCode && <SelectCourseCode />} */}
+        {selectCourse.selectCourse && (
+          <SelectCourseCode handleCourseModal={handleCourseModal} />
+        )}
       </div>
       {editStudentOpen && (
         <EditStudent inputInfo={inputInfo} handleEdit={handleEdit} />
@@ -150,7 +150,7 @@ export default function StudentComp() {
   );
 }
 
-const SelectCourseCode = () => {
+const SelectCourseCode = ({ handleCourseModal }) => {
   return (
     <div className={style["select__course"]}>
       <header>
@@ -164,7 +164,11 @@ const SelectCourseCode = () => {
         <option value="MDE401">MDE401</option>
         <option value="MMQ401">MMQ401</option>
       </select>
-      <Button type="button" className="edit">
+      <Button
+        type="button"
+        onClick={() => handleCourseModal()}
+        className="edit"
+      >
         Submit
       </Button>
     </div>
@@ -201,7 +205,11 @@ const EditStudent = ({ inputInfo, handleEdit }) => {
         <Form className={style["form--wrapper"]}>
           <header>
             <h4>Edit Student</h4>
-            <FontAwesomeIcon icon={faTimes} onClick={handleEdit} className={style["fa"]}/>
+            <FontAwesomeIcon
+              icon={faTimes}
+              onClick={handleEdit}
+              className={style["fa"]}
+            />
           </header>
           <div className={style["student__id"]}>
             <label htmlFor="studentId">Student Id</label>
@@ -234,7 +242,7 @@ const EditStudent = ({ inputInfo, handleEdit }) => {
   );
 };
 
-const DeleteStudent = ({handleDelete}) => {
+const DeleteStudent = ({ handleDelete }) => {
   return (
     <div className={style["del__student"]}>
       <Formik
@@ -254,7 +262,11 @@ const DeleteStudent = ({handleDelete}) => {
         <Form className={style["form--wrapper"]}>
           <header>
             <h4>Delete Student</h4>
-            <FontAwesomeIcon icon={faTimes} onClick={handleDelete} className={style["fa"]}/>
+            <FontAwesomeIcon
+              icon={faTimes}
+              onClick={handleDelete}
+              className={style["fa"]}
+            />
           </header>
 
           <label htmlFor="Student Id">Student's ID</label>
@@ -274,7 +286,7 @@ const DeleteStudent = ({handleDelete}) => {
   );
 };
 
-StudentComp.propTypes = {
-  EditStudent: PropTypes.isRequired,
-  DeleteStudent: PropTypes.isRequired,
-};
+// StudentComp.propTypes = {
+//   EditStudent: PropTypes.isRequired,
+//   DeleteStudent: PropTypes.isRequired,
+// };

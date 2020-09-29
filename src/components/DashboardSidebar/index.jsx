@@ -33,8 +33,8 @@ export default function useDashboardSideBar() {
   return (
     <div className={style["container"]}>
       <ul>
-        {routes.map((route) => (
-          <li>
+        {routes.map((route, index) => (
+          <li key={index*10}>
             <NavLink activeClassName={style["active"]} to={route.route}>{route.name}</NavLink>
           </li>
         ))}
