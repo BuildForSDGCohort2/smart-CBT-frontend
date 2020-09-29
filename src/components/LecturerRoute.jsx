@@ -4,7 +4,7 @@ import {  useDispatch } from "react-redux";
 import * as tokenConfig from '../utils/tokenConfig'
 import * as authActions from '../redux/actions/authActions';
 
-export default function ProtectedRoutes({ component }) {
+export default function LecturerRoute({ component }) {
 //   const dispatch = useDispatch();
   // const auth = useSelector((state) => state.auth.isAuth);
   const Component = component;

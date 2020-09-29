@@ -6,9 +6,12 @@ import Button from "../Button";
 import useTable from "../Table";
 import style from "./index.module.scss";
 import * as studentActions from "../../redux/actions/studentActions";
+import * as examActions from "../../redux/actions/examActions";
 import PropTypes from "prop-types";
 import { inputInfo } from "../../utils/baseInput";
 import { useDispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 // import { useDispatch, useSelector } from "react-redux";
 
 export default function StudentComp() {
@@ -59,6 +62,8 @@ export default function StudentComp() {
   };
 
   React.useEffect(() => {
+    dispatch(examActions.getAllExams());
+
     setCourse(true);
     return () => {
       setCourse(false);
@@ -131,20 +136,22 @@ export default function StudentComp() {
             </Button>
           </div>
         </div>
-        {SelectCourseCode && <SelectCourseCode />}
-
+        {/* {SelectCourseCode && <SelectCourseCode />} */}
       </div>
-      {editStudentOpen && <EditStudent inputInfo={inputInfo} />}
-      {deleteStudentOpen && <DeleteStudent />}
+      {editStudentOpen && (
+        <EditStudent inputInfo={inputInfo} handleEdit={handleEdit} />
+      )}
+      {deleteStudentOpen && <DeleteStudent handleDelete={handleDelete} />}
     </>
   );
 }
 
 const SelectCourseCode = () => {
   return (
-    <div className={style['select__course']}>
+    <div className={style["select__course"]}>
       <header>
         <h3>Select course code</h3>
+        <p>Please select a course code to view students</p>
       </header>
 
       <label htmlFor="selectCourse"></label>
@@ -153,11 +160,14 @@ const SelectCourseCode = () => {
         <option value="MDE401">MDE401</option>
         <option value="MMQ401">MMQ401</option>
       </select>
+      <Button type="button" className="edit">
+        Submit
+      </Button>
     </div>
   );
 };
 
-const EditStudent = ({ inputInfo }) => {
+const EditStudent = ({ inputInfo, handleEdit }) => {
   console.log(inputInfo);
   return (
     <div className={style["edit__student"]}>
@@ -187,7 +197,16 @@ const EditStudent = ({ inputInfo }) => {
         <Form className={style["form--wrapper"]}>
           <header>
             <h4>Edit Student</h4>
+            <FontAwesomeIcon icon={faTimes} onClick={handleEdit} className={style["fa"]}/>
           </header>
+          <div className={style["student__id"]}>
+            <label htmlFor="studentId">Student Id</label>
+            <Field name="studentId" type="text" />
+            <Button className="edit" type="button">
+              Verify
+            </Button>
+          </div>
+
           {inputInfo.map((item) => {
             return (
               <>
@@ -211,7 +230,7 @@ const EditStudent = ({ inputInfo }) => {
   );
 };
 
-const DeleteStudent = () => {
+const DeleteStudent = ({handleDelete}) => {
   return (
     <div className={style["del__student"]}>
       <Formik
@@ -231,6 +250,7 @@ const DeleteStudent = () => {
         <Form className={style["form--wrapper"]}>
           <header>
             <h4>Delete Student</h4>
+            <FontAwesomeIcon icon={faTimes} onClick={handleDelete} className={style["fa"]}/>
           </header>
 
           <label htmlFor="Student Id">Student's ID</label>

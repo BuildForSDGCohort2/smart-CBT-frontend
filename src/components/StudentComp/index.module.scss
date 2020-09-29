@@ -2,18 +2,32 @@
 
 .form--wrapper,
 .form--container,
-.action__area {
+.action__area,
+.select__course,
+.edit__student header,
+.del__student header {
   display: flex;
 }
 
-.student--container {
+.student--container,
+.edit__student header,
+.del__student header {
   justify-content: space-between;
+}
+
+.fa {
+  font-weight: 300;
+  font-size: 20px;
+  color: $grey;
+
+  cursor: pointer;
 }
 
 .student--container,
 .edit__student,
-.del__student {
-  box-shadow: 0px 10px 8px 2px rgb(180, 180, 180);
+.del__student,
+.select__course {
+  box-shadow: 0px 10px 8px 2px rgb(226, 226, 226);
 }
 
 .form--container,
@@ -21,14 +35,20 @@
   width: 100%;
 }
 
-.form--container {
+.form--container,
+.select__course {
   place-content: center;
   place-items: center;
   // min-height: 100vh;
 }
 
+.form--wrapper,
+.select__course {
+  flex-direction: column;
+}
+
 .form--wrapper {
-  padding: 4rem 2rem;
+  padding: 1rem 2rem;
 }
 
 .error__message {
@@ -38,7 +58,6 @@
 }
 
 .form--wrapper {
-  flex-direction: column;
   height: fit-content;
   width: 30%;
   label {
@@ -60,12 +79,30 @@
 
 .select__course {
   position: absolute;
-  height: 300px;
-  left: 30%;
-  top: 30%;
-  width: 50%;
-  border: 1px solid black;
+  height: 90%;
+  top: 10px;
+  right: 8px;
+  width: 100%;
+  grid-column: 1/-1;
+
+  border: 1px solid #ccc;
   z-index: 3;
+
+  header,
+  select {
+    margin-bottom: 2rem;
+  }
+  header {
+    text-align: center;
+  }
+  select {
+    width: 40%;
+  }
+}
+
+.student__id input,
+.student__id {
+  margin: 1rem 0;
 }
 
 .edit__student,
@@ -80,12 +117,13 @@
 .student--container {
   display: flex;
   grid-column: 1/-1;
+  // height: 90%;
   padding: 1rem 2rem;
   background: #f9f9f9;
   z-index: 2;
 }
 .table {
-  border: 1px solid #ccc;
+  // border: 1px solid #ccc;
   width: 70%;
   padding: 1rem;
 }
@@ -96,7 +134,16 @@
 }
 
 // ==============
-
+.edit__student {
+  height: 80%;
+  overflow: scroll;
+}
+.edit__student,
+.del__student {
+  header {
+    align-items: center;
+  }
+}
 .edit__student,
 .del__student {
   position: fixed;

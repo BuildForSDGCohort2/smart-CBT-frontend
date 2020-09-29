@@ -3,26 +3,14 @@ import { NavLink } from "react-router-dom";
 // import { NavLink } from "react-router-dom";
 import style from "./index.module.scss";
 
-export default function DashboardSideBar() {
+export default function DashboardSideBar({route}) {
   const [openModal, setModal] = React.useState(false);
-  const [clickState, setClickState] = React.useState({
-    teachers: false,
-    student: false,
-    upload: false,
-    view: false,
-    account: false,
-  });
-  const handleModal = (e) => {
-    setModal({ ...clickState, [e.target.name]: !e.target.name });
-    // console.log("clicked", [e.target.name]);
-  };
 
-  console.log(clickState);
 
   const routes = [
     {
       route: "/admin/dashboard",
-      name: "Teachers",
+      name: "Dashboard",
     },
     {
       route: "/admin/student",

@@ -4,7 +4,8 @@ import {
   Switch,
   Route,
 } from "react-router-dom";
-import ProtectedRoutes from './components/ProtectedRoute';
+import AdminRoute from './components/AdminRoute';
+import LecturerRoute from './components/LecturerRoute';
 import SignIn from './routes/admin/SignIn'
 // const Upload = React.lazy(() => import('./routes/Upload'));
 const Dashboard = React.lazy(() => import('./routes/Dashboard'));
@@ -19,11 +20,13 @@ export default function app() {
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <Route exact path="/" component={SignIn} />
-          <ProtectedRoutes exact path="/admin/dashboard" component={Dashboard} />
-          <ProtectedRoutes exact path="/admin/account" component={Account} />
-          <ProtectedRoutes exact path="/admin/upload_question" component={UploadQuestion} />
-          <ProtectedRoutes exact path="/admin/view_questions" component={ViewQuestion} />
-          <ProtectedRoutes exact path="/admin/student" component={Student} />
+          <AdminRoute exact path="/admin/dashboard" component={Dashboard} />
+          <AdminRoute exact path="/admin/account" component={Account} />
+          <AdminRoute exact path="/admin/upload_question" component={UploadQuestion} />
+          <AdminRoute exact path="/admin/view_questions" component={ViewQuestion} />
+          <AdminRoute exact path="/admin/student" component={Student} />
+          <LecturerRoute exact path="/lecturer/dashboard" component={Dashboard} />
+          <LecturerRoute exact path="/lecturer/student" component={Student} />
 
         </Switch>
       </Suspense>
