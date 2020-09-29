@@ -4,7 +4,7 @@ import * as authActions from "../../redux/actions/authActions";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import style from "../../assets/RouteStyle/signin.module.scss";
-import Button from "../../components/ErrorBoundary/Button";
+import Button from "../../components/Button";
 
 export default function SignIn() {
   const dispatch = useDispatch();

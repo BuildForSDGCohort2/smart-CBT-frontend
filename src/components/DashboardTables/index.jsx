@@ -2,14 +2,15 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import React from "react";
 // import { useDispatch } from "react-redux";
 // import * as Yup from "yup";
-// import * as studentActions from "../../redux/actions/studentActions";
-import Button from "../../Button";
+import * as studentActions from "../../redux/actions/studentActions";
+import Button from "../Button";
 import useTable from "../Table";
 import style from "./index.module.scss";
 import PropTypes from "prop-types";
 import { inputInfo } from "../../utils/baseInput";
+// import { useDispatch, useSelector } from "react-redux";
 
-export default function Students() {
+export default function DashboardTables() {
   const tableHead = ["Teacher ID", "First Name", "Last Name", "Email"];
   const keys = ["teacherId", "firstName", "lastName", "email"];
 
@@ -23,8 +24,8 @@ export default function Students() {
   ];
 
   const Table = useTable(tableHead, tableBody, keys);
-  const RegisteredStudentsTable = useTable(tableHead, tableBody, keys);
-  const UploadedCoursesTable = useTable(tableHead, tableBody, keys);
+  // const RegisteredStudentsTable = useTable(tableHead, tableBody, keys);
+  // const UploadedCoursesTable = useTable(tableHead, tableBody, keys);
 
   const [editStudentOpen, setEditOpen] = React.useState(false);
   const [deleteStudentOpen, setDelOpen] = React.useState(false);
@@ -36,7 +37,7 @@ export default function Students() {
   const handleDelete = () => {
     setDelOpen(!deleteStudentOpen);
   };
-  // const dispatch = useDispatch();
+ 
 
   return (
     <>
@@ -224,9 +225,7 @@ const DeleteStudent = () => {
   );
 };
 
-
-
-Students.propTypes = {
+DashboardTables.propTypes = {
   EditStudent: PropTypes.isRequired,
   DeleteStudent: PropTypes.isRequired,
 };

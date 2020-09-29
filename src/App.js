@@ -8,6 +8,7 @@ import ProtectedRoutes from './components/ProtectedRoute';
 import SignIn from './routes/admin/SignIn'
 // const Upload = React.lazy(() => import('./routes/Upload'));
 const Dashboard = React.lazy(() => import('./routes/admin/Dashboard'));
+const Account = React.lazy(() => import('./routes/admin/Account'));
 
 export default function app() {
   return (
@@ -16,6 +17,7 @@ export default function app() {
         <Switch>
           <Route exact path="/" component={SignIn} />
           <ProtectedRoutes exact path="/admin/dashboard" component={Dashboard} />
+          <ProtectedRoutes exact path="/admin/account" component={Account} />
 
         </Switch>
       </Suspense>

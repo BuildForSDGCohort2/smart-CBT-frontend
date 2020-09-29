@@ -49,7 +49,7 @@ export default function DashboardSideBar() {
       <ul>
         <li>Teachers</li>
         <li onClick={handleModal} name="student">Students</li>
-        <li>Courses</li>
+        {/* <li>Courses</li> */}
         <li>Upload Questions</li>
         <li>View Questions</li>
         <li>Account</li>

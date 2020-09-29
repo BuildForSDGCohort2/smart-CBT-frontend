@@ -2,7 +2,9 @@ import React from "react";
 import Layout from "../../components/Layout";
 import style from "../../assets/RouteStyle/dashboard.module.scss";
 // import Table from "../../components/Table";
-import Students from "../../components/Students";
+import DashboardTables from "../../components/DashboardTables";
+import * as studentActions from "../../redux/actions/studentActions";
+
 import useTable from "../../components/Table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,6 +16,7 @@ import {
   faBook,
   faUserGraduate,
 } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Dashboard() {
   const topSection = [
@@ -46,16 +49,30 @@ export default function Dashboard() {
     "Last Name",
     "Email",
   ];
-  const uploadedCourses = ["Course ID", "Course title", "Course Code"];
+  const uploadedCoursesHead = ["Course ID", "Course title", "Course Code"];
   // const tableHead = ["Teacher ID", "First Name", "Last Name", "Email"];
 
   const studentTablebody = [
-    { studentId: "001", firstName: "MHS 600", lastName:"adegbite", email: "Victoria@mail " },
-    { studentId: "002", firstName: "MHS 600", lastName:"adegbite", email: "abuja@email" },
-    { studentId: "003", firstName: "MHS 702", lastName:"adegbite", email: "jos@email" },
+    {
+      studentId: "001",
+      firstName: "MHS 600",
+      lastName: "adegbite",
+      email: "Victoria@mail ",
+    },
+    {
+      studentId: "002",
+      firstName: "MHS 600",
+      lastName: "adegbite",
+      email: "abuja@email",
+    },
+    {
+      studentId: "003",
+      firstName: "MHS 702",
+      lastName: "adegbite",
+      email: "jos@email",
+    },
   ];
 
-  
   const tablebody = [
     { name: "Ade", course: "MHS 600", email: "Lagos" },
     { name: "Basit", course: "MHS 600", email: "abuja" },
@@ -64,11 +81,22 @@ export default function Dashboard() {
 
   const keys = ["studentId", "firstName", "lastName", "email"];
   const Table = useTable(tableHead, tablebody, keys);
-  const studentTable = useTable(RegisteredStudentsTable, studentTablebody, keys);
-  const uploadTable = useTable(uploadedCourses, tablebody, keys);
+  const studentTable = useTable(
+    RegisteredStudentsTable,
+    studentTablebody,
+    keys
+  );
+  const uploadTable = useTable(uploadedCoursesHead, tablebody, keys);
   // const Table = useTable(tableHead, tablebody, keys);
 
   // console.log(Table)
+
+  const dispatch = useDispatch();
+  const state = useSelector((state) => console.log(state));
+
+  React.useEffect(() => {
+    dispatch(studentActions.getStudent(401));
+  }, []);
 
   return (
     <Layout>
@@ -92,7 +120,7 @@ export default function Dashboard() {
       <Misc />
       {studentTable}
       {uploadTable}
-      {/* <Students /> */}
+      {/* <DashboardTables /> */}
     </Layout>
   );
 }

@@ -6,7 +6,7 @@ import axios from "axios";
 // We could set other properties here like headers, etc
 
 const instance = axios.create({
-  baseURL: "http://smart-cbt-backend.herokuapp.com/doc"
+  baseURL: "https://smart-cbt-backend.herokuapp.com/"
 });
 
 export default instance;

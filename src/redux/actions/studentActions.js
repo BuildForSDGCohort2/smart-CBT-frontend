@@ -27,9 +27,9 @@ export const addStudent = (formData) => (dispatch, getState) => {
             'Content-Type': 'application/json',
         }
     }
-    const endPoint = endpoints.ADMIN_URL
+    const endPoint = endpoints.EXAMS_URL
     axios
-        .post(`${endPoint}/admin/login`, formData, config)
+        .post(`${endPoint}/{examId}/students/`, formData, config)
         .then(res => {
 
             dispatch(addStudentSuccess(res.data))
@@ -41,3 +41,37 @@ export const addStudent = (formData) => (dispatch, getState) => {
         });
 }
 
+const getStudentStart = () => ({
+    type: types.GET_ALL_STUDENTS_START
+})
+
+const getStudentSuccess = (data) => ({
+    type: types.GET_ALL_STUDENTS_SUCCESS,
+    data
+})
+const getStudentFail = (data) => ({
+    type: types.GET_ALL_STUDENTS_FAIL
+})
+
+
+
+export const getStudent = (examId) => (dispatch, getState) => {
+    dispatch(getStudentStart())
+    const config = {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        }
+    }
+    const endPoint = endpoints.EXAMS_URL
+    axios
+        .post(`${endPoint}/${examId}/students/`, config)
+        .then(res => {
+            dispatch(getStudentSuccess(res.data))
+        })
+        .catch(err => {
+            dispatch(getStudentFail())
+            console.log(err)
+            // dispatch(returnErrors(err.response.data, err.response.status))
+        });
+}
