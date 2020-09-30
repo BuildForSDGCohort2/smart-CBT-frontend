@@ -16,6 +16,11 @@
     flex-direction: column;
 }
 
+.form__button,
+.form__group{
+    width: 90%;
+}
+
 
 .modal__header{
     padding: 1rem;
@@ -38,7 +43,6 @@
 }
 
 .form__group{
-    width: 90%;
     margin-bottom: 3rem;
 
     label, select{
@@ -65,7 +69,6 @@
 }
 
 .form__button{
-    width: 90%;
     margin-top: 2rem;
     align-items: center;
 

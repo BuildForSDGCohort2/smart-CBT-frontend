@@ -1,10 +1,8 @@
 .question__container{
     padding: 2rem 0;
-    width: 100%;
 }
 
 .question__header{
-    width: 100%;
     margin: 1rem 0;
     padding: 0 3rem;
 
@@ -14,8 +12,28 @@
     }
 }
 
+.question__answer,
+.question__control--button{
+    display: flex;
+}
+
+.question__control--numbers,
+.question__control--button,
+.question__answer,
+.question__view{
+    padding: 0 25rem;
+    margin-bottom: 2rem;
+
+}
+
+.question__header,
+.question__container,
 .separator{
     width: 100%;
+}
+
+
+.separator{
     height: 30px;
     background-color: rgb(245, 245, 245);
     margin: 1rem 0;
@@ -65,10 +83,6 @@
 
 }
 
-.question__answer,
-.question__control--button{
-    display: flex;
-}
 
 
 .question__control--button{
@@ -85,14 +99,7 @@
     }
 }
 
-.question__control--numbers,
-.question__control--button,
-.question__answer,
-.question__view{
-    padding: 0 25rem;
-    margin-bottom: 2rem;
 
-}
 .question__control--numbers{
     display: grid;
     grid-template-columns: repeat(10, 10%);
