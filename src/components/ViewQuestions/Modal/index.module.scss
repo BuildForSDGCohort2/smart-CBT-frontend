@@ -1,7 +1,5 @@
 .modal__container{
     position: fixed;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: space-between;
     top: 25%;
@@ -9,6 +7,13 @@
     right: 35%;
     border: 10px solid rgb(237, 237, 237);
     padding: 2rem;
+}
+
+.modal__container,
+.form,
+.form__button{
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -27,9 +32,6 @@
 
 
 .form{
-    display: flex;
-    flex-direction: column;
-    // justify-content: center;
     align-items: center;
     margin-top: 1rem;
     width: 100%;
@@ -38,24 +40,25 @@
 .form__group{
     width: 90%;
     margin-bottom: 3rem;
+
+    label, select{
+        display: block;
+        letter-spacing: 0.02rem;
+    }
    
     label{
-        display: block;
         font-weight: 500;
         font-size: 1.2rem;
-        letter-spacing: 0.02rem;
         margin-bottom: 1rem;
 
     }
 
     select{
-        display: block;
         width: 100%;
         border: 2px solid rgba(6, 6, 179, .4);
         line-height: 2;
         padding: 1rem;
         font-weight: 600;
-        letter-spacing: 0.02rem;
         outline: none;
     }
 
@@ -64,7 +67,6 @@
 .form__button{
     width: 90%;
     margin-top: 2rem;
-    display: flex;
     align-items: center;
 
    button{

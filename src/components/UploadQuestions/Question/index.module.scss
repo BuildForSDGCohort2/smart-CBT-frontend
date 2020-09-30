@@ -23,8 +23,6 @@
 }
 
 .question__view{
-    padding: 0 25rem;
-    margin-bottom: 2rem;
 
     h1{
         text-align: center;
@@ -46,11 +44,9 @@
 
 
 .question__answer{
-    display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 0 25rem;
-    margin-bottom: 2rem;
+
 
     h1{
         font-weight: 600;
@@ -69,14 +65,16 @@
 
 }
 
-
+.question__answer,
 .question__control--button{
     display: flex;
+}
+
+
+.question__control--button{
     align-items: center;
     justify-content: space-between;
-    padding: 0 25rem;
-    margin-bottom: 2rem;
-
+ 
     button{
        background-color: rgb(55, 55, 55);
        color: white;
@@ -87,10 +85,16 @@
     }
 }
 
+.question__control--numbers,
+.question__control--button,
+.question__answer,
+.question__view{
+    padding: 0 25rem;
+    margin-bottom: 2rem;
+
+}
 .question__control--numbers{
     display: grid;
-    padding: 0 25rem;
-    margin: 2rem 0;
     grid-template-columns: repeat(10, 10%);
     grid-row-gap: 10px;
 

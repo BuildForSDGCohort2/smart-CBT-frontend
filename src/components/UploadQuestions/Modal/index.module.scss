@@ -1,20 +1,39 @@
 .modal__container{
     position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     top: 25%;
     left: 30%;
     right: 30%;
     border: 1px solid black;
 }
 
-.modal__title{
+.modal__container,
+.modal__title,
+.form__group,
+.form__control,
+.modal__footer{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+}
+
+.modal__container,
+.modal__footer{
+    justify-content: center;
+}
+
+.modal__container,
+.form__control{
+    flex-direction: column;
+}
+
+.modal__title,
+.form__control,
+.modal__footer,
+.modal__content{
     width: 100%;
+}
+
+.modal__title{
+    justify-content: space-between;
     padding: 0 1.5rem;
 
     h1{
@@ -34,7 +53,6 @@
 .modal__content{
     background-color: rgb(247, 244, 244);
     padding: 2rem;
-    width: 100%;
 }
 
 .modal__header{
@@ -57,11 +75,7 @@
 
 
 .form__group{
-    display: flex;
-    align-items: center;
-    margin: 2rem;
-    // justify-content: center;
-    
+    margin: 2rem;    
 }
 
 .form__label{
@@ -75,10 +89,6 @@
 }
 
 .form__control{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
 
     input{
         width: 100%;
@@ -108,11 +118,7 @@
 
 .modal__footer{
     padding: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: rgb(63, 63, 63);
-    width: 100%;
 
     button{
         background-color: rgb(230, 230, 230);
