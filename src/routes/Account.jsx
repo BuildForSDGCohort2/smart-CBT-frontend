@@ -1,7 +1,7 @@
 import React from "react";
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import { accountInfo } from "../utils/baseInput";
-import style from "../assets/RouteStyle/account.module.scss";
+// import { accountInfo } from "../utils/baseInput";
+// import style from "../assets/RouteStyle/account.module.scss";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
 import Button from "../components/Button";

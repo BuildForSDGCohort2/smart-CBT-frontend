@@ -144,9 +144,9 @@ export default Question;
 
 const UploadQuestion = ({ values }) => {
   console.log(values);
-  const [questions, setQuestions] = React.useState({
-    questions: [],
-  });
+  // const [questions, setQuestions] = React.useState({
+  //   questions: [],
+  // });
 
   const [inputChange, setInputChange] = React.useState([
     {
@@ -157,12 +157,10 @@ const UploadQuestion = ({ values }) => {
 
   const onChangeHandler = (e) => {
     console.log(e.target.value);
-    setInputChange([{...inputChange,
-      [e.target.name]: e.target.value,
-    }]);
+    setInputChange([{ [e.target.name]: e.target.value }]);
   };
 
-  console.log(inputChange)
+  console.log(inputChange);
   return (
     <div className={styles["question__container"]}>
       <div className={styles["question__header"]}>
