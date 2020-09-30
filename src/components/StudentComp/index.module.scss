@@ -5,7 +5,7 @@
 .action__area,
 .select__course,
 .edit__student header,
-.del__student header {
+.del__student header,.open__batch {
   display: flex;
 }
 
@@ -25,7 +25,7 @@
 
 .student--container,
 .edit__student,.del__student,
-.select__course {
+.select__course,.open__batch {
   box-shadow: 0px 10px 8px 2px rgb(226, 226, 226);
 }
 
@@ -42,7 +42,7 @@
 }
 
 .form--wrapper,
-.select__course {
+.select__course,.open__batch {
   flex-direction: column;
 }
 
@@ -72,7 +72,7 @@
 .form--wrapper,
 .edit__student,
 .del__student,
-.select__course {
+.select__course,.open__batch {
   background: $white;
 }
 
@@ -105,7 +105,7 @@
 }
 
 .edit__student,
-.del__student {
+.del__student,.open__batch {
   top: 10%;
   right: 5%;
   padding: 1.5rem;
@@ -117,7 +117,7 @@
   display: flex;
   justify-content: space-evenly;
   grid-column: 1/-1;
-  height: 85%;
+  // height: 85%;
   // padding: 1rem 2rem;
   background: #f9f9f9;
   z-index: 2;
@@ -149,7 +149,7 @@
   }
 }
 .edit__student,
-.del__student {
+.del__student,.open__batch {
   position: fixed;
   width: 50%;
   top: 10%;

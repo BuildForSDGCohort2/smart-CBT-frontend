@@ -18,7 +18,7 @@ const getExamFail = () => ({
 
 
 
-export const getAllExams = () => (dispatch, getState) => {
+export const getAllExams = () => (dispatch) => {
     dispatch(getExamStart())
     const config = {
         headers: {
@@ -28,7 +28,7 @@ export const getAllExams = () => (dispatch, getState) => {
     }
     const endPoint = endpoints.EXAMS_URL
     axios
-        .post(`${endPoint}`, config)
+        .get(`${endPoint}`, config)
         .then(res => {
 
             dispatch(getExamSuccess(res.data))
@@ -64,7 +64,7 @@ export const getStudent = (examId) => (dispatch, getState) => {
     }
     const endPoint = endpoints.EXAMS_URL
     axios
-        .post(`${endPoint}/${examId}/students/`, config)
+        .post(`${endPoint}/${examId}/students`, config)
         .then(res => {
             dispatch(getStudentSuccess(res.data))
         })

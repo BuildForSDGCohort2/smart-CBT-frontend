@@ -19,7 +19,7 @@ const addStudentFail = (data) => ({
 
 
 
-export const addStudent = (formData) => (dispatch, getState) => {
+export const addStudent = (formData, examId) => (dispatch) => {
     dispatch(addStudentStart())
     const config = {
         headers: {
@@ -29,7 +29,7 @@ export const addStudent = (formData) => (dispatch, getState) => {
     }
     const endPoint = endpoints.EXAMS_URL
     axios
-        .post(`${endPoint}/{examId}/students/`, formData, config)
+        .post(`${endPoint}/${examId}/students`, formData, config)
         .then(res => {
 
             dispatch(addStudentSuccess(res.data))
@@ -65,7 +65,7 @@ export const getStudent = (examId) => (dispatch, getState) => {
     }
     const endPoint = endpoints.EXAMS_URL
     axios
-        .post(`${endPoint}/${examId}/students/`, config)
+        .get(`${endPoint}/${examId}/students/`, config)
         .then(res => {
             dispatch(getStudentSuccess(res.data))
         })

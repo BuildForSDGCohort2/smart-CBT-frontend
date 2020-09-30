@@ -113,13 +113,10 @@ export default function Dashboard() {
         })}
       </div>
 
-      {/* Tbody takes an array of key value pairs, key = table name and value = table data */}
-
       {Table}
       <Misc />
       {studentTable}
       {uploadTable}
-      {/* <DashboardTables /> */}
     </Layout>
   );
 }

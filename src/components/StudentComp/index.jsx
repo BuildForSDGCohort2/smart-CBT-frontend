@@ -7,9 +7,9 @@ import useTable from "../Table";
 import style from "./index.module.scss";
 import * as studentActions from "../../redux/actions/studentActions";
 import * as examActions from "../../redux/actions/examActions";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { inputInfo } from "../../utils/baseInput";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 // import { useDispatch, useSelector } from "react-redux";
@@ -17,22 +17,12 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 export default function StudentComp() {
   const dispatch = useDispatch();
 
-  const tableHead = [
-    "Student ID",
-    "First Name",
-    "Last Name",
-    "Phone Number",
-    "Course Code",
-    "Email",
-  ];
-  const keys = [
-    "studentId",
-    "firstName",
-    "lastName",
-    "phoneNum",
-    "courseCode",
-    "email",
-  ];
+  const exams = useSelector((state) => state.exam.all_exams);
+  const studentData = useSelector((state) => state.student);
+  console.log(studentData.students?.students);
+
+  const tableHead = ["Student Reg No", "Name", "Hall", "Department"];
+  const keys = ["regNo", "name", "hall", "department"];
 
   const tableBody = [
     {
@@ -45,11 +35,14 @@ export default function StudentComp() {
     },
   ];
 
-  const Table = useTable(tableHead, tableBody, keys);
-
   const [selectCourse, setCourse] = React.useState({ selectCourse: false });
+  const [courseCode, setCourseCode] = React.useState({ courseCode: "" });
+  const [openBatchUpload, setOpenBatchUpload] = React.useState(false);
+
   const [editStudentOpen, setEditOpen] = React.useState(false);
   const [deleteStudentOpen, setDelOpen] = React.useState(false);
+
+  const Table = useTable(tableHead, studentData.students?.students, keys);
 
   const handleEdit = () => {
     setEditOpen(!editStudentOpen);
@@ -59,11 +52,20 @@ export default function StudentComp() {
     setDelOpen(!deleteStudentOpen);
   };
   const handleCourseModal = () => {
+    dispatch(studentActions.getStudent(courseCode));
     setCourse({ ...selectCourse, selectCourse: !selectCourse.selectCourse });
   };
 
+  const handleUpload = () => {
+    setOpenBatchUpload(!openBatchUpload);
+  };
+
+  const handleChange = (e) => {
+    setCourseCode(e.target.value);
+  };
+
   React.useEffect(() => {
-    // dispatch(examActions.getAllExams());
+    dispatch(examActions.getAllExams());
 
     setCourse({ ...selectCourse, selectCourse: true });
   }, []);
@@ -73,7 +75,7 @@ export default function StudentComp() {
       <div className={style["student--container"]}>
         {/* <div className={style["form"]}> */}
         <Formik
-          initialValues={{ firstName: "", lastName: "", email: "" }}
+          initialValues={{ name: "", regNo: "", hall: "", department: "" }}
           // validationSchema={Yup.object({
           //   email: Yup.string()
           //     .max(15, "Must be 15 characters or less")
@@ -81,17 +83,15 @@ export default function StudentComp() {
           //     .required("Required"),
           //   password: Yup.string().required("Required"),
           // })}
-          onSubmit={(values, { setSubmitting }) => {
+          onSubmit={({ name, regNo, hall, department }, { setSubmitting }) => {
             const formData = new FormData();
+            // console.log(values);
+            formData.append("name", name);
+            regNo && formData.append("regNo", regNo);
+            formData.append("department", department);
+            formData.append("hall", hall);
 
-            inputInfo.forEach((item, index) => {
-              return formData.append(
-                `${item.name}`,
-                Object.values(values[index])
-              );
-            });
-
-            // dispatch(studentActions.addStudent(formData));
+            dispatch(studentActions.addStudent(formData, courseCode));
           }}
         >
           <Form className={style["form--wrapper"]}>
@@ -99,6 +99,7 @@ export default function StudentComp() {
               <h4>Add Student</h4>
               {/* <FontAwesomeIcon icon={faTimes} onClick={handleEdit} className={style["fa"]}/> */}
             </header>
+            {console.log(inputInfo)}
             {inputInfo.map((item) => {
               return (
                 <>
@@ -112,18 +113,27 @@ export default function StudentComp() {
               );
             })}
 
-            <Button type="submit" className="filled">
-              Add Student
-            </Button>
+            <div>
+              <Button type="submit" className="filled">
+                Add Student
+              </Button>
+
+              <span onClick={handleUpload}> Batch Upload</span>
+            </div>
+
             {/* <button type="submit">Submit</button> */}
           </Form>
         </Formik>
 
         <div className={style["table"]}>
-          { !selectCourse.selectCourse && Table}
+          {!selectCourse.selectCourse && Table}
 
           <div className={style["action__area"]}>
-            <Button type="button" className="refresh">
+            <Button
+              type="button"
+              className="refresh"
+              onClick={() => dispatch(studentActions.getStudent(courseCode))}
+            >
               Refresh
             </Button>
             <Button type="button" className="edit" onClick={() => handleEdit()}>
@@ -139,9 +149,14 @@ export default function StudentComp() {
           </div>
         </div>
         {selectCourse.selectCourse && (
-          <SelectCourseCode handleCourseModal={handleCourseModal} />
+          <SelectCourseCode
+            handleCourseModal={handleCourseModal}
+            exams={exams}
+            handleChange={handleChange}
+          />
         )}
       </div>
+      {openBatchUpload && <OpenBatch openBatch={handleUpload}/>}
       {editStudentOpen && (
         <EditStudent inputInfo={inputInfo} handleEdit={handleEdit} />
       )}
@@ -150,7 +165,22 @@ export default function StudentComp() {
   );
 }
 
-const SelectCourseCode = ({ handleCourseModal }) => {
+const OpenBatch = ({openBatch}) => {
+  return (
+    <div className={style["open__batch"]}>
+      <header>
+        <h4>Batch Upload</h4>
+      </header>
+
+      <input type="file" name="batchUplaod" id="" accept="text/csv" />
+      <Button type="button" className="edit">
+        Upload
+      </Button>
+    </div>
+  );
+};
+
+const SelectCourseCode = ({ handleCourseModal, exams, handleChange }) => {
   return (
     <div className={style["select__course"]}>
       <header>
@@ -159,10 +189,12 @@ const SelectCourseCode = ({ handleCourseModal }) => {
       </header>
 
       <label htmlFor="selectCourse"></label>
-      <select name="" id="selectCourse">
-        <option value="MME401">MME401</option>
-        <option value="MDE401">MDE401</option>
-        <option value="MMQ401">MMQ401</option>
+      <select name="courseCode" id="selectCourse" onChange={handleChange}>
+        <option value="">Please Select Option</option>;
+        {exams?.exams &&
+          exams.exams.map((exam) => {
+            return <option value={exam.id}>{exam.courseCode}</option>;
+          })}
       </select>
       <Button
         type="button"
@@ -176,7 +208,7 @@ const SelectCourseCode = ({ handleCourseModal }) => {
 };
 
 const EditStudent = ({ inputInfo, handleEdit }) => {
-  console.log(inputInfo);
+  // console.log(inputInfo);
   return (
     <div className={style["edit__student"]}>
       <Formik
@@ -192,7 +224,7 @@ const EditStudent = ({ inputInfo, handleEdit }) => {
           const formData = new FormData();
 
           inputInfo.forEach((item, index) => {
-            console.log("values", Object.values(values[index]));
+            // console.log("values", Object.values(values[index]));
             return formData.append(
               `${item.name}`,
               Object.values(values[index])

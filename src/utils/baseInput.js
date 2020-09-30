@@ -1,29 +1,31 @@
+//  "regNo": 2018223005,
+//  "Name": "Nwankwo Damilola",
+//  "password": "42FGrtY",
+//  "department": "History",
+//  "hall": "hall 1A"
+
+
 export const inputInfo = [
   {
-    htmlFor: "First Name",
-    name: "firstName",
-    type: "text",
-  },
-  {
-    htmlFor: "Last Name",
-    name: "lastName",
-    type: "text",
-  },
-  {
-    htmlFor: "Phone",
-    name: "phone",
-    type: "text",
-  },
-  {
-    htmlFor: "Course Code",
-    name: "courseCode",
+    htmlFor: "Reg No",
+    name: "regNo",
     type: "number",
   },
   {
-    htmlFor: "Email",
-    name: "email",
-    type: "email",
+    htmlFor: "Name",
+    name: "name",
+    type: "text",
   },
+  {
+    htmlFor: "Department",
+    name: "department",
+    type: "text",
+  },
+  {
+    htmlFor: "Hall",
+    name: "hall",
+    type: "text",
+  }
 ];
 
 

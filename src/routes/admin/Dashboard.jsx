@@ -43,12 +43,7 @@ export default function Dashboard() {
   ];
 
   const tableHead = ["Teacher ID", "First Name", "Last Name", "Email"];
-  const RegisteredStudentsTable = [
-    "Student ID",
-    "First Name",
-    "Last Name",
-    "Email",
-  ];
+ 
   const uploadedCoursesHead = ["Course ID", "Course title", "Course Code"];
   // const tableHead = ["Teacher ID", "First Name", "Last Name", "Email"];
 
@@ -73,29 +68,30 @@ export default function Dashboard() {
     },
   ];
 
-  const tablebody = [
-    { name: "Ade", course: "MHS 600", email: "Lagos" },
-    { name: "Basit", course: "MHS 600", email: "abuja" },
-    { name: "Josh", course: "MHS 702", email: "jos" },
+  const tablebody = [];
+
+  const keys = ["regNo", "name", "hall", "department"];
+  const Table = useTable(tableHead, tablebody, keys);
+  const RegisteredStudentsTable = [
+    "Student ID",
+    "Name",
+    "Hall",
+    "Department",
   ];
 
-  const keys = ["studentId", "firstName", "lastName", "email"];
-  const Table = useTable(tableHead, tablebody, keys);
-  const studentTable = useTable(
-    RegisteredStudentsTable,
-    studentTablebody,
-    keys
-  );
+  const Students = useSelector((state) => state.student?.students.students);
+  // console.log(Students);
+
+  const studentTable = useTable(RegisteredStudentsTable, Students, keys);
   const uploadTable = useTable(uploadedCoursesHead, tablebody, keys);
   // const Table = useTable(tableHead, tablebody, keys);
 
   // console.log(Table)
 
   const dispatch = useDispatch();
-  const state = useSelector((state) => console.log(state));
 
   React.useEffect(() => {
-    dispatch(studentActions.getStudent(401));
+    dispatch(studentActions.getStudent(1));
   }, []);
 
   return (
@@ -108,7 +104,7 @@ export default function Dashboard() {
                 <span>{item.icon} </span>
                 <span>{item.name} </span>
               </div>
-              <span className={style["amt"]}>{item.amt} </span>
+              <span className={style["amt"]}>{Students?.length} </span>
             </div>
           );
         })}
