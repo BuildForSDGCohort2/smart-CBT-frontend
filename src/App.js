@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import AdminRoute from './components/AdminRoute';
 import LecturerRoute from './components/LecturerRoute';
+import Modal from './components/UploadQuestions/';
 import SignIn from './routes/admin/SignIn'
 // const Upload = React.lazy(() => import('./routes/Upload'));
 const lecturerDashboard = React.lazy(() => import('./routes/lecturer/Dashboard'));
@@ -24,7 +25,7 @@ export default function app() {
           <Route exact path="/Logout" component={SignIn} />
           <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
           <AdminRoute exact path="/admin/account" component={Account} />
-          <AdminRoute exact path="/admin/upload_question" component={UploadQuestion} />
+          <AdminRoute exact path="/admin/upload_question" component={Modal} />
           <AdminRoute exact path="/admin/view_questions" component={ViewQuestion} />
           <AdminRoute exact path="/admin/student" component={Student} />
           <LecturerRoute exact path="/lecturer/dashboard" component={lecturerDashboard} />

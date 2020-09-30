@@ -23,7 +23,6 @@ export const addStudent = (formData, examId) => (dispatch) => {
     dispatch(addStudentStart())
     const config = {
         headers: {
-            Accept: 'application/json',
             'Content-Type': 'application/json',
         }
     }

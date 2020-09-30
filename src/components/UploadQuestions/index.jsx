@@ -1,23 +1,15 @@
-import React, {useState} from "react";
-
-
+import React, { useState } from "react";
+import Layout from "../Layout";
 import Modal from "./Modal";
+
 import Question from "./Question";
 
-
-const Container = props => {
-
-    const [showModal, setModal] = useState(true);
-
-    const modal = showModal ? <Modal switchModal={setModal} /> : <Question />
-
-
-    return(
-        <>
-        {modal}
-        </>
-    )
-}
-
+const Container = (props) => {
+  return (
+    <Layout>
+      <Modal />
+    </Layout>
+  );
+};
 
 export default Container;
