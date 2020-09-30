@@ -1,10 +1,40 @@
-.modal__container {
-  display: flex;
-  flex-direction: column;
+.modal__container{
+    position: fixed;
+    top: 25%;
+    left: 30%;
+    right: 30%;
+    border: 1px solid black;
 }
 
-.modal__container {
-  position: relative;
+.modal__container,
+.modal__title,
+.form__group,
+.form__control,
+.modal__footer{
+    display: flex;
+    align-items: center;
+}
+
+.modal__container,
+.modal__footer{
+    justify-content: center;
+}
+
+.modal__container,
+.form__control{
+    flex-direction: column;
+}
+
+.modal__title,
+.form__control,
+.modal__footer,
+.modal__content{
+    width: 100%;
+}
+
+.modal__title{
+    justify-content: space-between;
+    padding: 0 1.5rem;
 
   border: 1px solid black;
 }
@@ -22,11 +52,9 @@
     font-size: 1.2rem;
   }
 
-  button {
-    border: none;
-    background-color: transparent;
-    font-size: 2rem;
-  }
+.modal__content{
+    background-color: rgb(247, 244, 244);
+    padding: 2rem;
 }
 
 .modal__content {
@@ -50,11 +78,9 @@
   }
 }
 
-.form__group {
-  display: flex;
-  align-items: center;
-  margin: 2rem;
-  // justify-content: center;
+
+.form__group{
+    margin: 2rem;    
 }
 
 .form__label {
@@ -67,11 +93,7 @@
   }
 }
 
-.form__control {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+.form__control{
 
   input {
     width: 100%;
@@ -97,34 +119,32 @@
   }
 }
 
-.modal__footer {
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(63, 63, 63);
-  width: 100%;
 
-  button {
-    background-color: rgb(230, 230, 230);
-    padding: 0.4rem 2.5rem;
-    border: none;
-    outline: none;
-    font-weight: bold;
-    &:hover {
-      background-color: white;
+.modal__footer{
+    padding: 1rem;
+    background-color: rgb(63, 63, 63);
+
+    button{
+        background-color: rgb(230, 230, 230);
+        padding: 0.4rem 2.5rem;
+        border: none;
+        outline: none;
+        font-weight: bold;
+
+        &:hover{
+           background-color: white;
+        }
+
+        &:nth-child(odd){
+            margin-right: 6rem; 
+        }
+    
+        &:nth-child(even){
+            margin-left: 6rem;
+        }
+
+
     }
-
-    &:disabled {
-      color: rgb(197, 197, 197);
-    }
   }
 
-  button:nth-child(odd) {
-    margin-right: 6rem;
-  }
-
-  button:nth-child(even) {
-    margin-left: 6rem;
-  }
 }

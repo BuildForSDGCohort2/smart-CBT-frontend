@@ -5,25 +5,28 @@ import { object, string, number } from "yup";
 import Button from "../../Button";
 import styles from "./index.module.scss";
 
-export default function Modal(props) {
-  const initialValues = {
-    courseTitle: "",
-    noOfQuestions: "",
-    marksPerQuestion: "",
-  };
 
-  const validationSchema = object({
-    courseTitle: string()
-      .min(5)
-      .max(20, "Must be 20 characters or less")
-      .required(),
-    noOfQuestions: number().required(),
-    marksPerQuestion: string().min(2).required(),
-  });
 
-  return (
-    <div className={styles["modal__container"]}>
-      <div className={styles["modal__title"]}>
+const Modal = props => {
+
+    const {switchModal} = props;
+
+    const initialValues = {
+        courseTitle: "",
+        noOfQuestions: "",
+        marksPerQuestion: ""
+    }
+
+    const validationSchema = object({
+        courseTitle: string().min(5).max(20, "Must be 20 characters or less").required(),
+        noOfQuestions: number().required(),
+        marksPerQuestion: string().min(2).required()
+    })
+
+
+    return(
+ <div className={styles["modal__container"]}>
+    <div className={styles["modal__title"]}>
         <h1>New Course</h1>
         <Button type="click">X</Button>
       </div>
@@ -37,78 +40,55 @@ export default function Modal(props) {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={(values) => {
-              // console.log(values);
-              props.switchModal(false);
-            }}
-          >
-            {({ values, handleSubmit, handleChange, errors }) => (
-              <Form autoComplete="off" onSubmit={handleSubmit} id="my-form">
-                <div className={styles["form__group"]}>
-                  <div className={styles["form__label"]}>
-                    <label htmlFor="coursename">Enter Course Title: </label>
-                  </div>
+                console.log(values);
+                switchModal(false);
+            }}>
+                {
+                    ({values, handleSubmit, handleChange}) =>(
 
-                  <div className={styles["form__control"]}>
-                    <Field
-                      name="courseTitle"
-                      value={values.courseTitle}
-                      onChange={handleChange}
-                      type="text"
-                      id="coursename"
-                    />
-                    <ErrorMessage name="courseTitle" />
-                  </div>
-                </div>
+                        <Form autoComplete="off" onSubmit={handleSubmit} id="my-form">
+                            <div className={styles["form__group"]}>
+                              <div className={styles["form__label"]}>
+                                    <label htmlFor="coursename">Enter Course Title: </label>
+                              </div>
+                               
+                               <div className={styles["form__control"]}>
+                                    <Field name="courseTitle" value={values.courseTitle} onChange={handleChange}
+                                    type="text" id="coursename" />
+                                    <ErrorMessage name="courseTitle" />
+                               </div>
+                            </div>
 
-                <div className={styles["form__group"]}>
-                  <div className={styles["form__label"]}>
-                    <label htmlFor="noofquestions">
-                      Enter Number of Questions:
-                    </label>
-                  </div>
+                            <div className={styles["form__group"]}>
+                               <div className={styles["form__label"]}>
+                                    <label htmlFor="noofquestions">Enter Number of Questions:</label>
+                               </div>
 
-                  <div className={styles["form__control"]}>
-                    <Field
-                      name="noOfQuestions"
-                      value={values.noOfQuestions}
-                      onChange={handleChange}
-                      type="number"
-                      id="noofquestions"
-                    />
-                    <ErrorMessage name="noOfQuestions" />
-                  </div>
-                </div>
+                               <div className={styles["form__control"]}>
+                                    <Field name="noOfQuestions" value={values.noOfQuestions} onChange={handleChange}
+                                    type="number" id="noofquestions" />
+                                    <ErrorMessage name="noOfQuestions" />
+                               </div>
+                            </div>
 
-                <div className={styles["form__group"]}>
-                  <div className={styles["form__label"]}>
-                    <label htmlFor="marksperquestion">
-                      Marks per Question:
-                    </label>
-                  </div>
+                            <div className={styles["form__group"]}>
+                               <div className={styles["form__label"]}>
+                                    <label htmlFor="marksperquestion">Marks per Question:</label>
+                               </div>
 
-                  <div className={styles["form__control"]}>
-                    <Field
-                      name="marksPerQuestion"
-                      value={values.marksPerQuestion}
-                      onChange={handleChange}
-                      type="text"
-                      id="marksperquestion"
-                    />
-                    <ErrorMessage name="marksPerQuestion" />
-                  </div>
-                </div>
-                {/* <pre>{JSON.stringify(values, null, 4)}</pre> */}
-                <pre>{JSON.stringify(errors, null, 4)}</pre>
-              </Form>
-            )}
-          </Formik>
-          <hr />
-          <p>
-            <strong>
-              * &nbsp; Please fill up the above and click on <i>Next</i> to
-              continue.
-            </strong>
-          </p>
+                               <div className={styles["form__control"]}>
+                                    <Field name="marksPerQuestion" value={values.marksPerQuestion} onChange={handleChange}
+                                    type="text" id="marksperquestion" />
+                                    <ErrorMessage name="marksPerQuestion" />
+                               </div>
+                            </div>
+                             
+                        </Form>
+                    )
+                }
+            </Formik>
+            <hr />
+            <p><b>* &nbsp; Please fill up the above and click on <i>Next</i> to continue.</b></p>
         </div>
       </div>
 
@@ -121,6 +101,8 @@ export default function Modal(props) {
     </div>
   );
 }
+
+export default Modal;
 
 const UploadQuestion = (props) => {
   const [questions, setQuestions] = React.useState({
