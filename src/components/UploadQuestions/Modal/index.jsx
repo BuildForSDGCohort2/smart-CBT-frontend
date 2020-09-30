@@ -24,7 +24,7 @@ const Question = () => {
       .max(20, "Must be 20 characters or less")
       .required(),
     noOfQuestions: number().required(),
-    marksPerQuestion: string().min(2).required(),
+    marksPerQuestion: string().required(),
   });
   return (
     <>
@@ -143,35 +143,71 @@ const Question = () => {
 export default Question;
 
 const UploadQuestion = ({ values }) => {
-  console.log(values);
+  
   const [questions, setQuestions] = React.useState({
-    questions: [],
+    questions: []
   });
 
-  const [inputChange, setInputChange] = React.useState([
-    {
+  const [inputChange, setInputChange] = React.useState({
       question: "",
       answer: "",
-    },
-  ]);
+    });
+
+  const {courseTitle, noOfQuestions, marksPerQuestion} = values;
 
   const onChangeHandler = (e) => {
-    console.log(e.target.value);
     setInputChange([{...inputChange,
       [e.target.name]: e.target.value,
     }]);
   };
 
-  console.log(inputChange)
+  const addQuestionHandler = e => {
+
+    //first we get our input values
+    const parent = e.target.parentNode.parentNode.parentNode;
+
+    const question = parent.querySelector("#view").querySelector("[name=question]").value;
+    const answer = parent.querySelector("#answer").querySelector("[name=answer]").value;
+
+    console.log(question, answer);
+
+    const quest = [...questions.questions];
+    quest.push({ question, answer });
+
+    //then we add it to the setQuestions
+    setQuestions({
+      questions: quest
+    });
+
+    //then we set the inputs back to its initial state
+    parent.querySelector("#view").querySelector("[name=question]").value = "";
+    parent.querySelector("#answer").querySelector("[name=answer]").value = "";
+
+    console.log(questions);
+  }
+
+  const prevQuestionHandler = e => {
+
+    const quest = [...questions.questions];
+    //then we get the previous one that is current page - 1
+    const prevPage = quest.length - 1;
+    console.log(prevPage); 
+
+    //we use this number to fetch the data from the state and display
+    const questee = quest[prevPage];
+
+    console.log(questee);
+  }
+
   return (
     <div className={styles["question__container"]}>
       <div className={styles["question__header"]}>
         <h1>Question Review</h1>
       </div>
       <div className={styles["separator"]}></div>
-      <div className={styles["question__view"]}>
+      <div className={styles["question__view"]} id="view">
         <h1 htmlFor="question">
-          {values.courseTitle} 1/{values.noOfQuestions}
+           {courseTitle} {questions.questions.length + 1}/{noOfQuestions}
         </h1>
         <textarea
           value={inputChange["question"]}
@@ -181,7 +217,7 @@ const UploadQuestion = ({ values }) => {
           rows="6"
         ></textarea>
       </div>
-      <div className={styles["question__answer"]}>
+      <div className={styles["question__answer"]} id="answer">
         <h1 htmlFor="answer">Answer</h1>
         <input
           type="text"
@@ -192,11 +228,17 @@ const UploadQuestion = ({ values }) => {
         />
       </div>
       <div className={styles["question__control--button"]}>
-        <Button type="click">Prev</Button>
-        <Button type="click">Next</Button>
+
+        <Button type="click" 
+        onClick={prevQuestionHandler}>
+        Prev</Button>
+        <Button type="click" 
+        onClick={addQuestionHandler}>
+        Next</Button>
+
       </div>
       <div className={styles["question__control--numbers"]}>
-        {Array(values.noOfQuestions)
+        {Array(noOfQuestions)
           .fill()
           .map((_, i) => {
             return (
