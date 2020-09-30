@@ -1,8 +1,8 @@
 import axios from "../../utils/axios-base";
 import * as types from './actionTypes'
 import * as endpoints from '../../utils/endpoints';
-import * as tokenConfig from '../../utils/tokenConfig.js';
-import { returnErrors } from './messageActions';
+// import * as tokenConfig from '../../utils/tokenConfig.js';
+// import { returnErrors } from './messageActions';
 
 const addStudentStart = () => ({
     type: types.ADD_STUDENT_START
@@ -70,6 +70,40 @@ export const getStudent = (examId) => (dispatch, getState) => {
         })
         .catch(err => {
             dispatch(getStudentFail())
+            console.log(err)
+            // dispatch(returnErrors(err.response.data, err.response.status))
+        });
+}
+const verifyStudentStart = () => ({
+    type: types.VERIFY_STUDENT_START
+})
+
+const verifyStudentSuccess = (data) => ({
+    type: types.VERIFY_STUDENT_SUCCESS,
+    data
+})
+const verifyStudentFail = (data) => ({
+    type: types.VERIFY_STUDENT_FAIL
+})
+
+
+
+export const verifyStudent = (examId, regNo) => (dispatch) => {
+    dispatch(verifyStudentStart())
+    const config = {
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        }
+    }
+    const endPoint = endpoints.EXAMS_URL
+    axios
+        .get(`${endPoint}/${examId}/students/${regNo}`, config)
+        .then(res => {
+            dispatch(verifyStudentSuccess(res.data))
+        })
+        .catch(err => {
+            dispatch(verifyStudentFail())
             console.log(err)
             // dispatch(returnErrors(err.response.data, err.response.status))
         });

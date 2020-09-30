@@ -15,6 +15,7 @@ export default function reducer(state = initialState, action) {
                 isLoading: true,
             };
         case types.GET_ALL_STUDENTS_SUCCESS:
+        case types.VERIFY_STUDENT_SUCCESS:
             return {
                 ...state,
                 students: action.data,

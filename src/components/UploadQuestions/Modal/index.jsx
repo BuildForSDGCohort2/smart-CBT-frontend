@@ -4,12 +4,13 @@ import { object, string, number } from "yup";
 
 import Button from "../../Button";
 import styles from "./index.module.scss";
+import { v1 as uuidv1 } from "uuid";
 
 const Question = () => {
   const initialValues = {
-    courseTitle: "",
-    noOfQuestions: "",
-    marksPerQuestion: "",
+    courseTitle: "English",
+    noOfQuestions: 12,
+    marksPerQuestion: "11",
   };
   const [showQuestions, setQuestionsModal] = React.useState(false);
   const [Questions, setQuestionDetails] = React.useState(initialValues);
@@ -28,7 +29,7 @@ const Question = () => {
   });
   return (
     <>
-      {showQuestions ? (
+      {true ? (
         <UploadQuestion values={Questions} />
       ) : (
         <div className={styles["modal__container"]}>
@@ -161,30 +162,30 @@ const UploadQuestion = ({ values }) => {
     }]);
   };
 
-  const addQuestionHandler = e => {
+  // const addQuestionHandler = e => {
 
-    //first we get our input values
-    const parent = e.target.parentNode.parentNode.parentNode;
+  //   //first we get our input values
+  //   const parent = e.target.parentNode.parentNode.parentNode;
 
-    const question = parent.querySelector("#view").querySelector("[name=question]").value;
-    const answer = parent.querySelector("#answer").querySelector("[name=answer]").value;
+  //   const question = parent.querySelector("#view").querySelector("[name=question]").value;
+  //   const answer = parent.querySelector("#answer").querySelector("[name=answer]").value;
 
-    console.log(question, answer);
+  //   console.log(question, answer);
 
-    const quest = [...questions.questions];
-    quest.push({ question, answer });
+  //   const quest = [...questions.questions];
+  //   quest.push({ question, answer });
 
-    //then we add it to the setQuestions
-    setQuestions({
-      questions: quest
-    });
+  //   //then we add it to the setQuestions
+  //   setQuestions({
+  //     questions: quest
+  //   });
 
-    //then we set the inputs back to its initial state
-    parent.querySelector("#view").querySelector("[name=question]").value = "";
-    parent.querySelector("#answer").querySelector("[name=answer]").value = "";
+  //   //then we set the inputs back to its initial state
+  //   parent.querySelector("#view").querySelector("[name=question]").value = "";
+  //   parent.querySelector("#answer").querySelector("[name=answer]").value = "";
 
-    console.log(questions);
-  }
+  //   console.log(questions);
+  // }
 
   const prevQuestionHandler = e => {
 
@@ -199,6 +200,25 @@ const UploadQuestion = ({ values }) => {
     console.log(questee);
   }
 
+  console.log(values);
+  const [questions, setQuestions] = React.useState([]);
+
+  const [inputChange, setInputChange] = React.useState({
+    id: uuidv1(),
+    question: "",
+    answer: "",
+  });
+
+  const nextBtn = (values) => {
+    setQuestions([...questions, values]);
+  };
+
+  const onChangeHandler = (e) => {
+    console.log(e.target.value);
+    setInputChange({ ...inputChange, [e.target.name]: e.target.value });
+  };
+
+  console.log(questions);
   return (
     <div className={styles["question__container"]}>
       <div className={styles["question__header"]}>
@@ -229,12 +249,10 @@ const UploadQuestion = ({ values }) => {
       </div>
       <div className={styles["question__control--button"]}>
 
-        <Button type="click" 
-        onClick={prevQuestionHandler}>
-        Prev</Button>
-        <Button type="click" 
-        onClick={addQuestionHandler}>
-        Next</Button>
+        <Button type="button" onClick={prevQuestionHandler}>Prev</Button>
+        <Button type="button" onClick={() => nextBtn(inputChange)}>
+          Next
+        </Button>
 
       </div>
       <div className={styles["question__control--numbers"]}>
@@ -242,7 +260,7 @@ const UploadQuestion = ({ values }) => {
           .fill()
           .map((_, i) => {
             return (
-              <Button type="click" key={i}>
+              <Button type="click" className={styles["button"]} key={i}>
                 {i + 1}
               </Button>
             );

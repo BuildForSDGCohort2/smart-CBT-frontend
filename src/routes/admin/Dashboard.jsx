@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../../components/Layout";
 import style from "../../assets/RouteStyle/dashboard.module.scss";
 // import Table from "../../components/Table";
-import DashboardTables from "../../components/StudentComp";
+// import DashboardTables from "../../components/StudentComp";
 import * as studentActions from "../../redux/actions/studentActions";
 
 import useTable from "../../components/Table";
@@ -68,10 +68,51 @@ export default function Dashboard() {
     },
   ];
 
-  const tablebody = [];
+  const lecturerData = [ {
+    lecturerId: "001",
+    firstName: "Henshaw",
+    lastName: "James",
+    email: "Victoria@mail ",
+  },
+  {
+    lecturerId: "002",
+    firstName: "Davo",
+    lastName: "Micheal",
+    email: "abuja@email",
+  },
+  {
+    lecturerId: "003",
+    firstName: "Kaluyi",
+    lastName: "adegbite",
+    email: "jos@email",
+  }];
+
+  
+  const uploadTableData = [ {
+    courseId: "001",
+    course: "Mass Communication",
+    courseCode: "James",
+  },
+  {
+    courseId: "001",
+    course: "Pharmacy",
+    courseCode: "PHM 001",
+  },
+  {
+    courseId: "001",
+    course: "Medicine",
+    courseCode: "MN221",
+  }];
+
+
+
+
 
   const keys = ["regNo", "name", "hall", "department"];
-  const Table = useTable(tableHead, tablebody, keys);
+  
+  const uploaddedCourseKeys = ["courseId", "course", "courseCode"];
+  const lecturerkeys = ["lecturerId", "lastName", "firstName", "email"];
+  const lecturerTable = useTable(tableHead, lecturerData, lecturerkeys);
   const RegisteredStudentsTable = [
     "Student ID",
     "Name",
@@ -83,7 +124,7 @@ export default function Dashboard() {
   // console.log(Students);
 
   const studentTable = useTable(RegisteredStudentsTable, Students, keys);
-  const uploadTable = useTable(uploadedCoursesHead, tablebody, keys);
+  const uploadTable = useTable(uploadedCoursesHead, uploadTableData, uploaddedCourseKeys);
   // const Table = useTable(tableHead, tablebody, keys);
 
   // console.log(Table)
@@ -112,7 +153,7 @@ export default function Dashboard() {
 
       {/* Tbody takes an array of key value pairs, key = table name and value = table data */}
 
-      {Table}
+      {lecturerTable}
       <Misc />
       {studentTable}
       {uploadTable}

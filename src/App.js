@@ -12,7 +12,7 @@ import SignIn from './routes/admin/SignIn'
 const lecturerDashboard = React.lazy(() => import('./routes/lecturer/Dashboard'));
 const AdminDashboard = React.lazy(() => import('./routes/admin/Dashboard'));
 const Account = React.lazy(() => import('./routes/Account'));
-const UploadQuestion = React.lazy(() => import('./routes/UploadQuestion'));
+// const UploadQuestion = React.lazy(() => import('./routes/UploadQuestion'));
 const ViewQuestion = React.lazy(() => import('./routes/ViewQuestions'));
 const Student = React.lazy(() => import('./routes/admin/Students'));
 

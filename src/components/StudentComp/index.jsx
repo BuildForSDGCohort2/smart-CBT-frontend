@@ -24,16 +24,16 @@ export default function StudentComp() {
   const tableHead = ["Student Reg No", "Name", "Hall", "Department"];
   const keys = ["regNo", "name", "hall", "department"];
 
-  const tableBody = [
-    {
-      studentId: 123,
-      firstName: "Ade",
-      lastName: "yusuf",
-      phoneNum: "hdhd",
-      courseCode: "hdhd",
-      email: "hdhd",
-    },
-  ];
+  // const tableBody = [
+  //   {
+  //     studentId: 123,
+  //     firstName: "Ade",
+  //     lastName: "yusuf",
+  //     phoneNum: "hdhd",
+  //     courseCode: "hdhd",
+  //     email: "hdhd",
+  //   },
+  // ];
 
   const [selectCourse, setCourse] = React.useState({ selectCourse: false });
   const [courseCode, setCourseCode] = React.useState({ courseCode: "" });
@@ -165,6 +165,8 @@ export default function StudentComp() {
   );
 }
 
+
+
 const OpenBatch = ({openBatch}) => {
   return (
     <div className={style["open__batch"]}>
@@ -179,6 +181,9 @@ const OpenBatch = ({openBatch}) => {
     </div>
   );
 };
+
+
+
 
 const SelectCourseCode = ({ handleCourseModal, exams, handleChange }) => {
   return (
@@ -207,12 +212,14 @@ const SelectCourseCode = ({ handleCourseModal, exams, handleChange }) => {
   );
 };
 
-const EditStudent = ({ inputInfo, handleEdit }) => {
+
+
+const EditStudent = ({ inputInfo, handleEdit, regNo }) => {
   // console.log(inputInfo);
   return (
     <div className={style["edit__student"]}>
       <Formik
-        initialValues={{ firstName: "", lastName: "", email: "" }}
+        initialValues={{ studentRegNo: "", lastName: "", email: "" }}
         // validationSchema={Yup.object({
         //   email: Yup.string()
         //     .max(15, "Must be 15 characters or less")
@@ -245,8 +252,8 @@ const EditStudent = ({ inputInfo, handleEdit }) => {
           </header>
           <div className={style["student__id"]}>
             <label htmlFor="studentId">Student Id</label>
-            <Field name="studentId" type="text" />
-            <Button className="edit" type="button">
+            <Field name="studentId" type="text"  />
+            <Button className="edit" type="button" onClick={()=>studentActions.verifyStudent(1, regNo)}>
               Verify
             </Button>
           </div>
