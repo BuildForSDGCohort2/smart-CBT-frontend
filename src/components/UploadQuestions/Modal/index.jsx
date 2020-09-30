@@ -4,12 +4,13 @@ import { object, string, number } from "yup";
 
 import Button from "../../Button";
 import styles from "./index.module.scss";
+import { v1 as uuidv1 } from "uuid";
 
 const Question = () => {
   const initialValues = {
-    courseTitle: "",
-    noOfQuestions: "",
-    marksPerQuestion: "",
+    courseTitle: "English",
+    noOfQuestions: 12,
+    marksPerQuestion: "11",
   };
   const [showQuestions, setQuestionsModal] = React.useState(false);
   const [Questions, setQuestionDetails] = React.useState(initialValues);
@@ -28,7 +29,7 @@ const Question = () => {
   });
   return (
     <>
-      {showQuestions ? (
+      {true ? (
         <UploadQuestion values={Questions} />
       ) : (
         <div className={styles["modal__container"]}>
@@ -144,23 +145,24 @@ export default Question;
 
 const UploadQuestion = ({ values }) => {
   console.log(values);
-  // const [questions, setQuestions] = React.useState({
-  //   questions: [],
-  // });
+  const [questions, setQuestions] = React.useState([]);
 
-  const [inputChange, setInputChange] = React.useState([
-    {
-      question: "",
-      answer: "",
-    },
-  ]);
+  const [inputChange, setInputChange] = React.useState({
+    id: uuidv1(),
+    question: "",
+    answer: "",
+  });
+
+  const nextBtn = (values) => {
+    setQuestions([...questions, values]);
+  };
 
   const onChangeHandler = (e) => {
     console.log(e.target.value);
-    setInputChange([{ [e.target.name]: e.target.value }]);
+    setInputChange({ ...inputChange, [e.target.name]: e.target.value });
   };
 
-  console.log(inputChange);
+  console.log(questions);
   return (
     <div className={styles["question__container"]}>
       <div className={styles["question__header"]}>
@@ -190,15 +192,17 @@ const UploadQuestion = ({ values }) => {
         />
       </div>
       <div className={styles["question__control--button"]}>
-        <Button type="click">Prev</Button>
-        <Button type="click">Next</Button>
+        <Button type="button">Prev</Button>
+        <Button type="button" onClick={() => nextBtn(inputChange)}>
+          Next
+        </Button>
       </div>
       <div className={styles["question__control--numbers"]}>
         {Array(values.noOfQuestions)
           .fill()
           .map((_, i) => {
             return (
-              <Button type="click" key={i}>
+              <Button type="click" className={styles["button"]} key={i}>
                 {i + 1}
               </Button>
             );
