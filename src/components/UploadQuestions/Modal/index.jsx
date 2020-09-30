@@ -10,6 +10,8 @@ import styles from "./index.module.scss";
 
 const Modal = props => {
 
+    const {switchModal} = props;
+
     const initialValues = {
         courseTitle: "",
         noOfQuestions: "",
@@ -21,7 +23,6 @@ const Modal = props => {
         noOfQuestions: number().required(),
         marksPerQuestion: string().min(2).required()
     })
-
 
 
     return(
@@ -42,10 +43,10 @@ const Modal = props => {
             validationSchema={validationSchema}
             onSubmit={(values) => {
                 console.log(values);
-                props.switchModal(false);
+                switchModal(false);
             }}>
                 {
-                    ({values, handleSubmit, handleChange, errors}) =>(
+                    ({values, handleSubmit, handleChange}) =>(
 
                         <Form autoComplete="off" onSubmit={handleSubmit} id="my-form">
                             <div className={styles["form__group"]}>
@@ -83,8 +84,6 @@ const Modal = props => {
                                     <ErrorMessage name="marksPerQuestion" />
                                </div>
                             </div>
-                            {/* <pre>{JSON.stringify(values, null, 4)}</pre> */}
-                            <pre>{JSON.stringify(errors, null, 4)}</pre>
                              
                         </Form>
                     )

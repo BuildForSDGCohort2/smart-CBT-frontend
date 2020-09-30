@@ -21,6 +21,11 @@
     width: 90%;
 }
 
+.form,
+.form__buton{
+    align-items: center;
+}
+
 
 .modal__header{
     padding: 1rem;
@@ -37,7 +42,6 @@
 
 
 .form{
-    align-items: center;
     margin-top: 1rem;
     width: 100%;
 }
@@ -70,7 +74,6 @@
 
 .form__button{
     margin-top: 2rem;
-    align-items: center;
 
    button{
        padding: 0.5rem 3rem;
@@ -80,7 +83,6 @@
        outline: none;
        border: none;
        border-radius: 4px;
-       align-self: flex-end;
 
        &:hover{
            background-color: rgba(75, 0, 128, .6);

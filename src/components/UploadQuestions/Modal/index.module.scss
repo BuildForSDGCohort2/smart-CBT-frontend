@@ -126,22 +126,20 @@
         border: none;
         outline: none;
         font-weight: bold;
+
         &:hover{
            background-color: white;
         }
 
-        &:disabled{
-            color: rgb(197, 197, 197);
+        &:nth-child(odd){
+            margin-right: 6rem; 
         }
+    
+        &:nth-child(even){
+            margin-left: 6rem;
+        }
+
+
     }
 
-
-
-    button:nth-child(odd){
-        margin-right: 6rem; 
-    }
-
-    button:nth-child(even){
-        margin-left: 6rem;
-    }
 }

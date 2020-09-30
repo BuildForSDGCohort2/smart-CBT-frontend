@@ -6,6 +6,8 @@ import styles from "./index.module.scss";
 
 const Modal = props => {
 
+    const {switchModal} = props;
+
 
     return(
         <div className={styles["modal__container"]}>
@@ -25,7 +27,7 @@ const Modal = props => {
                 </div>
 
                 <div className={styles["form__button"]}>
-                    <Button type="click" onClick={() => props.switchModal(false)}>
+                    <Button type="click" onClick={() => switchModal(false)}>
                         Ok
                     </Button>
                 </div>
