@@ -233,6 +233,19 @@ const UploadQuestion = ({ values }) => {
           onChange={handleChange}
         />
       </div>
+
+      {/* 
+      
+      To do;
+
+      -- Add functionality for users to view next question,
+      -- Disable next button if question[index] has not been filled  
+      -- keep questions in place when page is refreshed  
+      -- Anything else you notice.  
+      
+      */}
+
+      
       <div className={styles["question__control--button"]}>
         <Button type="button" onClick={handlePrevBtn} disabled={index === 0}>
           Prev
