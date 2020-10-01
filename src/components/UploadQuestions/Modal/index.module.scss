@@ -126,6 +126,8 @@
       outline: none;
       font-weight: bold;
 
+   
+
       &:hover {
         background-color: white;
       }
@@ -204,9 +206,10 @@
       outline: none;
       background-color: rgb(245, 245, 245);
       padding: 2rem;
-      font-weight: bold;
+      font-weight: normal;
       letter-spacing: 0.02rem;
-      font-size: 1.5rem;
+      line-height: 1.5;
+      font-size: 1rem;
   }
 }
 
@@ -249,6 +252,10 @@
      border-radius: 100%;
      outline: none;
      cursor: pointer;
+
+     &:disabled{
+      background: rgb(133, 133, 133);
+    }
 
      &:hover{
       background-color: rgb(90, 89, 89);

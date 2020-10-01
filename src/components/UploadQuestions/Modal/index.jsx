@@ -144,81 +144,67 @@ const Question = () => {
 export default Question;
 
 const UploadQuestion = ({ values }) => {
-  
-  const [questions, setQuestions] = React.useState({
-    questions: []
-  });
-
-  const [inputChange, setInputChange] = React.useState({
-      question: "",
-      answer: "",
-    });
-
-  const {courseTitle, noOfQuestions, marksPerQuestion} = values;
-
-  const onChangeHandler = (e) => {
-    setInputChange([{...inputChange,
-      [e.target.name]: e.target.value,
-    }]);
-  };
-
-  // const addQuestionHandler = e => {
-
-  //   //first we get our input values
-  //   const parent = e.target.parentNode.parentNode.parentNode;
-
-  //   const question = parent.querySelector("#view").querySelector("[name=question]").value;
-  //   const answer = parent.querySelector("#answer").querySelector("[name=answer]").value;
-
-  //   console.log(question, answer);
-
-  //   const quest = [...questions.questions];
-  //   quest.push({ question, answer });
-
-  //   //then we add it to the setQuestions
-  //   setQuestions({
-  //     questions: quest
-  //   });
-
-  //   //then we set the inputs back to its initial state
-  //   parent.querySelector("#view").querySelector("[name=question]").value = "";
-  //   parent.querySelector("#answer").querySelector("[name=answer]").value = "";
-
-  //   console.log(questions);
-  // }
-
-  const prevQuestionHandler = e => {
-
-    const quest = [...questions.questions];
-    //then we get the previous one that is current page - 1
-    const prevPage = quest.length - 1;
-    console.log(prevPage); 
-
-    //we use this number to fetch the data from the state and display
-    const questee = quest[prevPage];
-
-    console.log(questee);
-  }
-
-  console.log(values);
   const [questions, setQuestions] = React.useState([]);
+  const [index, setIndex] = React.useState(0);
 
   const [inputChange, setInputChange] = React.useState({
-    id: uuidv1(),
     question: "",
     answer: "",
   });
 
-  const nextBtn = (values) => {
-    setQuestions([...questions, values]);
+  const { courseTitle, noOfQuestions } = values;
+
+  const handlePrevBtn = (e) => {
+    setIndex(index - 1);
+    setInputChange(questions[index - 1]);
   };
 
-  const onChangeHandler = (e) => {
-    console.log(e.target.value);
-    setInputChange({ ...inputChange, [e.target.name]: e.target.value });
+  const handleNextBtn = (values) => {
+    questions[index + 1] !== undefined
+      ? setInputChange(questions[index + 1])
+      : handleInput(values);
+  };
+
+  const handleInput = (values) => {
+    console.log(values);
+
+    !values.id === questions[index + 1].id &&
+      setQuestions([...questions, values]);
+    // setInputChange({ ...inputChange, id: "", question: "", answer: "" });
+    setIndex(index + 1);
+
+    console.log(questions[index + 1]);
   };
 
   console.log(questions);
+
+  const handleChange = (e) => {
+    // console.log(e.target.value);
+    setInputChange({
+      ...inputChange,
+      id: uuidv1(),
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  React.useEffect(() => {
+    sessionStorage.setItem("questions", JSON.stringify(questions));
+  }, [questions]);
+  // {
+  //   "id": "jgr8eehdfi",
+  //   "question": "When was metallurgy last practised?",
+  //   "options": [
+  //     {
+  //       "a": 1884,
+  //       "b": "1200 BC"
+  //     }
+  //   ],
+  //   "answers": [
+  //     "b"
+  //   ],
+  //   "examId": "er23xXCQ"
+  // }
+
   return (
     <div className={styles["question__container"]}>
       <div className={styles["question__header"]}>
@@ -227,12 +213,12 @@ const UploadQuestion = ({ values }) => {
       <div className={styles["separator"]}></div>
       <div className={styles["question__view"]} id="view">
         <h1 htmlFor="question">
-           {courseTitle} {questions.questions.length + 1}/{noOfQuestions}
+          {courseTitle} {index + 1}/{noOfQuestions}
         </h1>
         <textarea
           value={inputChange["question"]}
           name="question"
-          onChange={onChangeHandler}
+          onChange={handleChange}
           id="question"
           rows="6"
         ></textarea>
@@ -244,28 +230,35 @@ const UploadQuestion = ({ values }) => {
           name="answer"
           value={inputChange["answer"]}
           id="answer"
-          onChange={onChangeHandler}
+          onChange={handleChange}
         />
       </div>
       <div className={styles["question__control--button"]}>
-
-        <Button type="button" onClick={prevQuestionHandler}>Prev</Button>
-        <Button type="button" onClick={() => nextBtn(inputChange)}>
-          Next
+        <Button type="button" onClick={handlePrevBtn} disabled={index === 0}>
+          Prev
         </Button>
 
+        {index + 1 === noOfQuestions ? (
+          <Button type="button" onClick={() => handleNextBtn(inputChange)}>
+            Upload
+          </Button>
+        ) : (
+          <Button type="button" onClick={() => handleNextBtn(inputChange)}>
+            Next
+          </Button>
+        )}
       </div>
-      <div className={styles["question__control--numbers"]}>
+      {/* <div className={styles["question__control--numbers"]}>
         {Array(noOfQuestions)
           .fill()
           .map((_, i) => {
             return (
-              <Button type="click" className={styles["button"]} key={i}>
+              <Button type="button" className={styles["button"]} key={i} disabled={index === i}>
                 {i + 1}
               </Button>
             );
           })}
-      </div>
+      </div> */}
     </div>
   );
 };
