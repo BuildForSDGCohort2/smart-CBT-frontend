@@ -144,6 +144,7 @@ const Question = () => {
 export default Question;
 
 const UploadQuestion = ({ values }) => {
+  const { courseTitle, noOfQuestions } = values;
   const [questions, setQuestions] = React.useState([]);
   const [index, setIndex] = React.useState(0);
 
@@ -152,34 +153,43 @@ const UploadQuestion = ({ values }) => {
     answer: "",
   });
 
-  const { courseTitle, noOfQuestions } = values;
-
   const handlePrevBtn = (e) => {
+    console.log("prev index", index);
     setIndex(index - 1);
     setInputChange(questions[index - 1]);
   };
 
   const handleNextBtn = (values) => {
-    questions[index + 1] !== undefined
-      ? setInputChange(questions[index + 1])
-      : handleInput(values);
+    // console.log(" index", questions[index]);
+    setIndex(index + 1);
+
+    questions[index] !== undefined ? handleInputChange() : handleInput(values);
+  };
+
+  const handleInputChange = () => {
+    // console.log("input changed");
+    questions[index + 1] === undefined
+      ? setInputChange({ ...inputChange, id: "", question: "", answer: "" })
+      : setInputChange(questions[index + 1]);
+
+    setIndex(index + 1);
   };
 
   const handleInput = (values) => {
-    console.log(values);
+    console.log("handleinput index", index);
 
-    !values.id === questions[index + 1].id &&
-      setQuestions([...questions, values]);
-    // setInputChange({ ...inputChange, id: "", question: "", answer: "" });
+    questions[index]=values;
+
+    // setQuestions([...questions, values]);
+    setInputChange({ ...inputChange, id: "", question: "", answer: "" });
     setIndex(index + 1);
 
-    console.log(questions[index + 1]);
+    console.log("handleInput", questions[index]);
   };
 
   console.log(questions);
 
   const handleChange = (e) => {
-    // console.log(e.target.value);
     setInputChange({
       ...inputChange,
       id: uuidv1(),
@@ -190,20 +200,6 @@ const UploadQuestion = ({ values }) => {
   React.useEffect(() => {
     sessionStorage.setItem("questions", JSON.stringify(questions));
   }, [questions]);
-  // {
-  //   "id": "jgr8eehdfi",
-  //   "question": "When was metallurgy last practised?",
-  //   "options": [
-  //     {
-  //       "a": 1884,
-  //       "b": "1200 BC"
-  //     }
-  //   ],
-  //   "answers": [
-  //     "b"
-  //   ],
-  //   "examId": "er23xXCQ"
-  // }
 
   return (
     <div className={styles["question__container"]}>
@@ -216,7 +212,7 @@ const UploadQuestion = ({ values }) => {
           {courseTitle} {index + 1}/{noOfQuestions}
         </h1>
         <textarea
-          value={inputChange["question"]}
+          // value={inputChange["question"]}
           name="question"
           onChange={handleChange}
           id="question"
@@ -228,7 +224,7 @@ const UploadQuestion = ({ values }) => {
         <input
           type="text"
           name="answer"
-          value={inputChange["answer"]}
+          value={inputChange.answer}
           id="answer"
           onChange={handleChange}
         />
