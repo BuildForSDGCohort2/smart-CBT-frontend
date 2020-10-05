@@ -1,0 +1,41 @@
+.form--wrapper,
+.form--container {
+  display: flex;
+}
+
+.form--container {
+  place-content: center;
+  place-items: center;
+  width: 100%;
+}
+
+.form--container {
+  min-height: 100vh;
+  background-color: rgb(227, 235, 245);
+}
+
+.form--wrapper {
+  padding: 4rem 2rem;
+  background-color: #ffffff;
+
+}
+
+.error__message {
+  color: red;
+  margin: 0;
+  margin: 1rem 0;
+}
+
+.form--wrapper {
+  flex-direction: column;
+  height: fit-content;
+  width: 30%;
+  box-shadow: 0 5px 10px 30px 5px rgb(179, 179, 179);
+  label {
+    margin-bottom: 1rem;
+  }
+
+  input {
+    padding: 0.5rem;
+  }
+}

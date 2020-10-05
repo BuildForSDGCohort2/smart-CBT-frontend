@@ -1,0 +1,170 @@
+@import "../../assets/RouteStyle/base.scss";
+
+.form--wrapper,
+.form--container,
+.action__area,
+.select__course,
+.edit__student header,
+.del__student header,.open__batch {
+  display: flex;
+}
+
+.student--container,
+.edit__student header,
+.del__student header {
+  justify-content: space-between;
+}
+
+.fa {
+  font-weight: 300;
+  font-size: 20px;
+  color: $grey;
+
+  cursor: pointer;
+}
+
+.student--container,
+.edit__student,.del__student,
+.select__course,.open__batch {
+  box-shadow: 0px 10px 8px 2px rgb(226, 226, 226);
+}
+
+.form--container,
+.student--container {
+  width: 100%;
+}
+
+.form--container,
+.select__course {
+  place-content: center;
+  place-items: center;
+  // min-height: 100vh;
+}
+
+.form--wrapper,
+.select__course,.open__batch {
+  flex-direction: column;
+}
+
+.form--wrapper {
+  padding: 1rem;
+  box-shadow: none;
+}
+
+.error__message {
+  color: red;
+  margin: 0;
+  margin: 1rem 0;
+}
+
+.form--wrapper {
+  height: fit-content;
+  width: 40%;
+  label {
+    margin-bottom: 0.4rem;
+  }
+
+  input {
+    padding: 0.2rem;
+  }
+}
+
+.form--wrapper,
+.edit__student,
+.del__student,
+.select__course,.open__batch {
+  background: $white;
+}
+
+.select__course {
+  position: absolute;
+  height: 90%;
+  top: 10px;
+  right: 8px;
+  width: 100%;
+  grid-column: 1/-1;
+
+  border: 1px solid #ccc;
+  z-index: 3;
+
+  header,
+  select {
+    margin-bottom: 2rem;
+  }
+  header {
+    text-align: center;
+  }
+  select {
+    width: 40%;
+  }
+}
+
+.student__id input,
+.student__id {
+  margin: 1rem 0;
+}
+
+.edit__student,
+.del__student,.open__batch {
+  top: 10%;
+  right: 5%;
+  padding: 1.5rem;
+  // width: 100%;
+  grid-column: 1/-1;
+}
+
+.student--container {
+  display: flex;
+  justify-content: space-evenly;
+  grid-column: 1/-1;
+  // height: 85%;
+  // padding: 1rem 2rem;
+  background: #f9f9f9;
+  z-index: 2;
+}
+.table {
+  // border: 1px solid #ccc;
+  height: 80%;
+  width: 70%;
+  padding: 1rem;
+}
+
+.action__area {
+  margin: 2rem 0;
+  position: relative;
+}
+
+// ==============
+.edit__student {
+  height: 85%;
+  overflow: scroll;
+  position: relative;
+
+}
+.edit__student,
+.del__student {
+  
+  header {
+    align-items: center;
+  }
+}
+.edit__student,
+.del__student,.open__batch {
+  position: fixed;
+  width: 50%;
+  top: 10%;
+  left: 35%;
+  z-index: 9;
+  .form--wrapper {
+    width: 100%;
+  }
+  input {
+    width: 100%;
+  }
+}
+
+.del__student {
+  top: 25%;
+  z-index: 10;
+  width: 50%;
+}

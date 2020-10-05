@@ -1,0 +1,82 @@
+@import "../RouteStyle/base.scss";
+
+.user__stats,
+.misc > header {
+  display: flex;
+}
+.misc {
+  display: grid;
+}
+.misc,
+.misc > div {
+  padding: 1rem;
+  flex-wrap: wrap;
+}
+
+.misc {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.user__stats,
+.misc header {
+  justify-content: space-between;
+  width: 100%;
+  grid-column: 1/-1;
+
+  // border: 1px solid red;
+}
+
+.user__stats--item {
+  //   border: 1px solid blue;
+  width: 23%;
+  background-color: $white;
+  // box-shadow: 0px 10px 8px #ccc;
+  box-shadow: 0px 5px 8px 2px rgb(212, 212, 212);
+
+  > div,
+  span {
+    display: inline-block;
+  }
+  span {
+    // border: 1px solid red;
+    margin: 1rem;
+  }
+}
+
+.misc {
+  background-color: $white;
+}
+.refresh,
+.user__amt,
+.courses,
+.questions {
+  display: flex;
+  span {
+    // border: 1px solid red;
+    padding: 0 .2rem;
+    display: inline-block;
+    border-right: 1px solid white;
+    width: 50%;
+
+    &:last-child {
+      border-right: 0;
+    }
+  }
+}
+
+.refresh {
+  background: rgb(137, 229, 137);
+}
+
+.courses {
+  background: rgb(247, 171, 85);
+}
+
+.questions {
+  background: rgb(132, 150, 229);
+}
+
+.user__amt {
+  background: rgb(113, 195, 233);
+}
