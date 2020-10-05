@@ -8,9 +8,9 @@ import { v1 as uuidv1 } from "uuid";
 
 const Question = () => {
   const initialValues = {
-    courseTitle: "English",
-    noOfQuestions: 12,
-    marksPerQuestion: "11",
+    courseTitle: "",
+    noOfQuestions: "",
+    marksPerQuestion: "",
   };
   const [showQuestions, setQuestionsModal] = React.useState(false);
   const [Questions, setQuestionDetails] = React.useState(initialValues);
@@ -21,7 +21,7 @@ const Question = () => {
 
   const validationSchema = object({
     courseTitle: string()
-      .min(5)
+      .min(4)
       .max(20, "Must be 20 characters or less")
       .required(),
     noOfQuestions: number().required(),
@@ -29,7 +29,7 @@ const Question = () => {
   });
   return (
     <>
-      {true ? (
+      {showQuestions ? (
         <UploadQuestion values={Questions} />
       ) : (
         <div className={styles["modal__container"]}>
@@ -145,7 +145,25 @@ export default Question;
 
 const UploadQuestion = ({ values }) => {
   const { courseTitle, noOfQuestions } = values;
-  const [questions, setQuestions] = React.useState([]);
+
+  const fillArray = Array(noOfQuestions)
+    .fill(null)
+    .map(() => {
+      return {
+        id: "jgr8eehdfi",
+        question: "When was metallurgy last practised?",
+        options: [
+          {
+            a: 1884,
+            b: "1200 BC",
+          },
+        ],
+        answers: ["b"],
+        examId: "er23xXCQ",
+      };
+    });
+
+  const [questions, setQuestions] = React.useState(fillArray);
   const [index, setIndex] = React.useState(0);
 
   const [inputChange, setInputChange] = React.useState({
@@ -154,47 +172,24 @@ const UploadQuestion = ({ values }) => {
   });
 
   const handlePrevBtn = (e) => {
-    console.log("prev index", index);
     setIndex(index - 1);
-    setInputChange(questions[index - 1]);
   };
 
   const handleNextBtn = (values) => {
-    // console.log(" index", questions[index]);
-    setIndex(index + 1);
-
-    questions[index] !== undefined ? handleInputChange() : handleInput(values);
-  };
-
-  const handleInputChange = () => {
-    // console.log("input changed");
-    questions[index + 1] === undefined
-      ? setInputChange({ ...inputChange, id: "", question: "", answer: "" })
-      : setInputChange(questions[index + 1]);
-
     setIndex(index + 1);
   };
-
-  const handleInput = (values) => {
-    console.log("handleinput index", index);
-
-    questions[index]=values;
-
-    // setQuestions([...questions, values]);
-    setInputChange({ ...inputChange, id: "", question: "", answer: "" });
-    setIndex(index + 1);
-
-    console.log("handleInput", questions[index]);
-  };
-
-  console.log(questions);
 
   const handleChange = (e) => {
-    setInputChange({
-      ...inputChange,
+    const newData = [...questions];
+
+    let questionValue = {
+      ...newData[index],
       id: uuidv1(),
       [e.target.name]: e.target.value,
-    });
+    };
+
+    newData[index] = questionValue;
+    setQuestions(newData);
   };
 
   React.useEffect(() => {
@@ -211,8 +206,9 @@ const UploadQuestion = ({ values }) => {
         <h1 htmlFor="question">
           {courseTitle} {index + 1}/{noOfQuestions}
         </h1>
+        {console.log("text area ", index)}
         <textarea
-          // value={inputChange["question"]}
+          value={questions[index].question}
           name="question"
           onChange={handleChange}
           id="question"
@@ -224,7 +220,7 @@ const UploadQuestion = ({ values }) => {
         <input
           type="text"
           name="answer"
-          value={inputChange.answer}
+          value={questions[index].answer}
           id="answer"
           onChange={handleChange}
         />
@@ -234,7 +230,7 @@ const UploadQuestion = ({ values }) => {
           Prev
         </Button>
 
-        {index + 1 === noOfQuestions ? (
+        {index === questions.length - 1 ? (
           <Button type="button" onClick={() => handleNextBtn(inputChange)}>
             Upload
           </Button>
@@ -244,17 +240,25 @@ const UploadQuestion = ({ values }) => {
           </Button>
         )}
       </div>
-      {/* <div className={styles["question__control--numbers"]}>
+      <div className={styles["question__control--numbers"]}>
         {Array(noOfQuestions)
           .fill()
           .map((_, i) => {
             return (
-              <Button type="button" className={styles["button"]} key={i} disabled={index === i}>
+              <Button
+                type="button"
+                className={styles["button"]}
+                key={i}
+                disabled={index === i}
+                onClick={() => {
+                  setIndex(i);
+                }}
+              >
                 {i + 1}
               </Button>
             );
           })}
-      </div> */}
+      </div>
     </div>
   );
 };

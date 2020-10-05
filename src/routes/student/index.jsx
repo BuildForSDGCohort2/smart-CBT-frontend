@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
+import StartExam from "../../components/StartExam";
+import SignIn from "../admin/SignIn";
 
 export default function StudentsPortal() {
-    return (
-        <div>
-            
-        </div>
-    )
+  return (
+    <div>
+      <StartExam />
+    </div>
+  );
 }

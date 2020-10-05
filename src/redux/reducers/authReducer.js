@@ -7,7 +7,6 @@ const initialState = {
   user: tokenConfig.getUserdata(),
   isAuth: false,
   isLoading: false,
-  forgotPassword: [],
   data: []
 };
 

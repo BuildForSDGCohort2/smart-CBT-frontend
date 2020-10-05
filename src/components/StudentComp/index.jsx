@@ -83,15 +83,15 @@ export default function StudentComp() {
           //     .required("Required"),
           //   password: Yup.string().required("Required"),
           // })}
-          onSubmit={({ name, regNo, hall, department }, { setSubmitting }) => {
-            const formData = new FormData();
-            // console.log(values);
-            formData.append("name", name);
-            regNo && formData.append("regNo", regNo);
-            formData.append("department", department);
-            formData.append("hall", hall);
+          onSubmit={(values, { setSubmitting }) => {
+            // const formData = new FormData();
+            // // console.log(values);
+            // formData.append("name", name);
+            // regNo && formData.append("regNo", regNo);
+            // formData.append("department", department);
+            // formData.append("hall", hall);
 
-            dispatch(studentActions.addStudent(formData, courseCode));
+            dispatch(studentActions.addStudent(values, courseCode));
           }}
         >
           <Form className={style["form--wrapper"]}>

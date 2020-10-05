@@ -26,10 +26,9 @@ const loginStart = () => ({
     type: types.LOGIN_START
 })
 
-const loginSuccess = (token, user) => ({
+const loginSuccess = (data) => ({
     type: types.LOGIN_SUCCESS,
-    token,
-    user
+    data
 })
 
 const loginFailed = () => ({
@@ -44,20 +43,16 @@ export const adminLogin = (formData) => (dispatch) => {
     dispatch(loginStart());
     const config = {
         headers: {
-            Accept: 'application/json',
             'Content-Type': 'application/json',
         }
     }
     const endPoint = endpoints.ADMIN_URL
     axios
-        .post(`${endPoint}/admin/login`, formData, config)
+        .post(`${endPoint}/login`, formData)
         .then(res => {
-            const token = res.data.token;
-            const user = res.data;
-            // const expires_at = res.data.auth.expires_at
-            tokenConfig.finishAuthentication(token, user)
-            // tokenConfig.finishAuthentication(token, user, expires_at)
-            dispatch(loginSuccess(token, user))
+            dispatch(loginSuccess(res))
+            dispatch(loadAuthUserSuccess())
+            console.log(res)
         })
         .catch(err => {
             dispatch(loginFailed())
@@ -67,7 +62,7 @@ export const adminLogin = (formData) => (dispatch) => {
 }
 
 
-export const teacherSignIn = (formData) => (dispatch) => {
+export const lecturerLogin = (formData) => (dispatch) => {
     dispatch(loginStart());
     const config = {
         headers: {
@@ -75,7 +70,7 @@ export const teacherSignIn = (formData) => (dispatch) => {
             'Content-Type': 'application/json',
         }
     }
-    const endPoint = endpoints.USERS_URL
+    const endPoint = endpoints.LECTURERS_URL
     axios
         .post(`${endPoint}/login`, formData, config)
         .then(res => {
@@ -92,26 +87,26 @@ export const teacherSignIn = (formData) => (dispatch) => {
         });
 }
 
-export const therapistSignup = formData => (dispatch) => {
-    // dispatch(addUserStart());
+export const studentLogin = formData => (dispatch) => {
+    dispatch(loginStart());
     const config = {
         headers: {
-            // Accept: 'application/json',
+            'content-type': 'application/json',
             // 'content-type': 'multipart/form-data',y
 
         }
     }
-    const endPoint = endpoints.ADMIN_URL
-    console.log("from actions", formData)
+    const endPoint = endpoints.STUDENTS_URL
+    // console.log("from actions", formData)
     axios
-        .post(`${endPoint}/sign-up`, formData, config)
+        .post(`${endPoint}/login`, formData, config)
         .then(res => {
-
+            console.log(res)
             // dispatch(addUserSuccess(res.data))
         })
         .catch(err => {
-            // dispatch(addUserFail())
-            dispatch(returnErrors(err.response.data, err.response.status))
+            dispatch(loginFailed())
+            // dispatch(returnErrors(err.response.data, err.response.status))
         });
 }
 

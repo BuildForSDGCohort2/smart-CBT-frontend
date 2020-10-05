@@ -6,38 +6,134 @@ import Button from "../../Button";
 import styles from "./index.module.scss";
 import { v1 as uuidv1 } from "uuid";
 
-const Modal = (props) => {
+const Question = () => {
+  const initialValues = {
+    courseTitle: "English",
+    noOfQuestions: 12,
+    marksPerQuestion: "11",
+  };
   const [showQuestions, setQuestionsModal] = React.useState(false);
+  const [Questions, setQuestionDetails] = React.useState(initialValues);
 
   const handleShowQuestions = () => {
     setQuestionsModal(!showQuestions);
   };
 
+  const validationSchema = object({
+    courseTitle: string()
+      .min(5)
+      .max(20, "Must be 20 characters or less")
+      .required(),
+    noOfQuestions: number().required(),
+    marksPerQuestion: string().required(),
+  });
   return (
     <>
-      {showQuestions ? (
-        <UploadQuestion values="" />
+      {true ? (
+        <UploadQuestion values={Questions} />
       ) : (
         <div className={styles["modal__container"]}>
-          <div className={styles["modal__header"]}>
-            <p>Enter Course Code</p>
+          <div className={styles["modal__title"]}>
+            <h1>New Course</h1>
+            <Button type="click">X</Button>
           </div>
-          <div className={styles["form"]}>
-            <div className={styles["form__group"]}>
-              <label htmlFor="coursecode">Course Code</label>
-              <select id="coursecode">
-                <option value="1">MCE 401</option>
-                <option value="1">GS 301</option>
-                <option value="1">ENGR 101</option>
-                <option value="1">MATH 201</option>
-              </select>
+          <div className={styles["modal__content"]}>
+            <div className={styles["modal__header"]}>
+              <p>Name and Size</p>
+              <hr />
             </div>
+            <div className={styles["modal__body"]}>
+              <Formik
+                initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={({
+                  courseTitle,
+                  noOfQuestions,
+                  marksPerQuestion,
+                }) => {
+                  setQuestionDetails({
+                    ...Questions,
+                    courseTitle,
+                    noOfQuestions,
+                    marksPerQuestion,
+                  });
+                  handleShowQuestions();
+                }}
+              >
+                {({ values, handleSubmit, handleChange }) => (
+                  <Form autoComplete="off" id="my-form">
+                    <div className={styles["form__group"]}>
+                      <div className={styles["form__label"]}>
+                        <label htmlFor="coursename">Enter Course Title: </label>
+                      </div>
 
-            <div className={styles["form__button"]}>
-              <Button type="click" onClick={() => handleShowQuestions()}>
-                Ok
-              </Button>
+                      <div className={styles["form__control"]}>
+                        <Field
+                          name="courseTitle"
+                          value={values.courseTitle}
+                          onChange={handleChange}
+                          type="text"
+                          id="coursename"
+                        />
+                        <ErrorMessage name="courseTitle" />
+                      </div>
+                    </div>
+
+                    <div className={styles["form__group"]}>
+                      <div className={styles["form__label"]}>
+                        <label htmlFor="noofquestions">
+                          Enter Number of Questions:
+                        </label>
+                      </div>
+
+                      <div className={styles["form__control"]}>
+                        <Field
+                          name="noOfQuestions"
+                          value={values.noOfQuestions}
+                          onChange={handleChange}
+                          type="number"
+                          id="noofquestions"
+                        />
+                        <ErrorMessage name="noOfQuestions" />
+                      </div>
+                    </div>
+
+                    <div className={styles["form__group"]}>
+                      <div className={styles["form__label"]}>
+                        <label htmlFor="marksperquestion">
+                          Marks per Question:
+                        </label>
+                      </div>
+
+                      <div className={styles["form__control"]}>
+                        <Field
+                          name="marksPerQuestion"
+                          value={values.marksPerQuestion}
+                          onChange={handleChange}
+                          type="text"
+                          id="marksperquestion"
+                        />
+                        <ErrorMessage name="marksPerQuestion" />
+                      </div>
+                    </div>
+                  </Form>
+                )}
+              </Formik>
+              <hr />
+              <p>
+                <b>
+                  * &nbsp; Please fill up the above and click on <i>Next</i> to
+                  continue.
+                </b>
+              </p>
             </div>
+          </div>
+
+          <div className={styles["modal__footer"]}>
+            <Button type="submit" form="my-form">
+              Next
+            </Button>
+            <Button type="click">Cancel</Button>
           </div>
         </div>
       )}
@@ -45,9 +141,11 @@ const Modal = (props) => {
   );
 };
 
-export default Modal;
+export default Question;
 
 const UploadQuestion = ({ values }) => {
+  const { courseTitle, noOfQuestions } = values;
+
   const [questions, setQuestions] = React.useState([]);
   const [index, setIndex] = React.useState(0);
 
@@ -56,40 +154,42 @@ const UploadQuestion = ({ values }) => {
     answer: "",
   });
 
-  const { courseTitle, noOfQuestions } = values;
-
   const handlePrevBtn = (e) => {
-    setInputChange(questions[index]);
+    // console.log("prev index", index);
     setIndex(index - 1);
+    setInputChange(questions[index - 1]);
   };
 
   const handleNextBtn = (values) => {
-    // console.log("qiestions index", questions[index-1]);
-    // questions[index + 1] &&
-    //   (questions[index + 1] = values || console.log("indexed"));
+    // console.log(" index", questions[index]);
+    setIndex(index + 1);
+    const newQuestion = [...questions].splice(index, 1, values);
+    console.log("newQuestion", newQuestion);
+    questions[index] !== undefined ? handleInputChange() : handleInput(values);
+  };
 
-    // setQuestions([...questions, values]);
+  const handleInputChange = () => {
+    // console.log("input changed");
+    questions[index + 1] === undefined
+      ? setInputChange({ ...inputChange, id: "", question: "", answer: "" })
+      : setInputChange(questions[index + 1]);
 
-    questions[index + 1] !== undefined
-      ? setInputChange(questions[index + 1])
-      : handleInput(values);
+    setIndex(index + 1);
   };
 
   const handleInput = (values) => {
-    // console.log(values);
+    // console.log("handleinput index", index);
 
-    // !values.id === questions[index + 1].id &&
     setQuestions([...questions, values]);
     setInputChange({ ...inputChange, id: "", question: "", answer: "" });
     setIndex(index + 1);
 
-    console.log("handleInput", questions[index]);
+    // console.log("handleInput", questions[index]);
   };
 
   // console.log(questions);
 
   const handleChange = (e) => {
-    // console.log(e.target.value);
     setInputChange({
       ...inputChange,
       id: uuidv1(),
@@ -112,7 +212,7 @@ const UploadQuestion = ({ values }) => {
           {courseTitle} {index + 1}/{noOfQuestions}
         </h1>
         <textarea
-          value={inputChange["question"]}
+          // value={inputChange["question"]}
           name="question"
           onChange={handleChange}
           id="question"
@@ -124,7 +224,7 @@ const UploadQuestion = ({ values }) => {
         <input
           type="text"
           name="answer"
-          value={inputChange["answer"]}
+          value={inputChange.answer}
           id="answer"
           onChange={handleChange}
         />

@@ -17,13 +17,15 @@ const Account = React.lazy(() => import('./routes/Account'));
 // const UploadQuestion = React.lazy(() => import('./routes/UploadQuestion'));
 const ViewQuestion = React.lazy(() => import('./routes/ViewQuestions'));
 const Student = React.lazy(() => import('./routes/admin/Students'));
+// const StartExam = React.lazy(() => import('./routes/StartExam'));
 
 export default function app() {
   return (
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
-          <Route exact path="/" component={SignIn} />
+          <Route exact path="/admin" component={SignIn} />
+          <Route exact path="/lecturer" component={SignIn} />
           <Route exact path="/Logout" component={SignIn} />
           <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
           <AdminRoute exact path="/admin/account" component={Account} />
@@ -33,6 +35,7 @@ export default function app() {
           <LecturerRoute exact path="/lecturer/dashboard" component={lecturerDashboard} />
           <LecturerRoute exact path="/lecturer/student" component={Student} />
           <StudentRoute exact path="/student" component={SignIn} />
+          <StudentRoute exact path="/start_exam" component={StudentsPortal} />
 
         </Switch>
       </Suspense>

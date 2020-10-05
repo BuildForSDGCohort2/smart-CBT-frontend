@@ -5,12 +5,39 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import style from "../../assets/RouteStyle/signin.module.scss";
 import Button from "../../components/Button";
+import { useHistory } from "react-router-dom";
 
 export default function SignIn() {
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.state);
+  const history = useHistory().location.pathname;
+  // const state = useSelector((state) => state.state);
 
-  console.log("state",state)
+  const initialValues =
+    history === "/student"
+      ? { password: "", regNo: "" }
+      : { password: "", email: "" };
+
+  console.log("history", history);
+
+  const handleSubmit = (values) => {
+    // console.log(email);
+    // const formData = new FormData();
+
+    // formData.append("email", email);
+    // formData.append("password", password);
+
+    // if(history.location.pathname === "/admin" ){
+    //   dispatch(authActions.adminLogin(formData))
+    // }
+
+    return history === "/admin"
+      ? dispatch(authActions.adminLogin(values))
+      : history === "/lecturer"
+      ? dispatch(authActions.lecturerLogin(values))
+      : history.toLowerCase() === "/student"
+      ? dispatch(authActions.studentLogin(values))
+      : "";
+  };
 
   React.useEffect(() => {
     // dispatch(authActions.adminLogin());
@@ -19,31 +46,40 @@ export default function SignIn() {
   return (
     <div className={style["form--container"]}>
       <Formik
-        initialValues={{ firstName: "", lastName: "", email: "" }}
+        initialValues={initialValues}
         validationSchema={Yup.object({
-          email: Yup.string()
-            .max(15, "Must be 15 characters or less")
-            // .email("Invalid email address")
-            .required("Required"),
+          // email: Yup.string()
+          //   .max(15, "Must be 15 characters or less")
+          //   // .email("Invalid email address")
+          //   .required("Required"),
           password: Yup.string().required("Required"),
         })}
-        onSubmit={({ email, password }, { setSubmitting }) => {
-          const formData = new FormData();
-
-          formData.append("email", email);
-          formData.append("password", password);
-
-          dispatch(authActions.adminLogin(formData));
+        onSubmit={(values, { setSubmitting }) => {
+          console.log("submitting", values);
+          handleSubmit(values);
         }}
       >
         <Form className={style["form--wrapper"]}>
-          <label htmlFor="email">Email</label>
+          {history === "/student" ? (
+            <>
+              <label htmlFor="regNo">Registration Number</label>
 
-          <Field name="email" type="email" />
+              <Field name="regNo" type="number" />
 
-          <div className={style["error__message"]}>
-            <ErrorMessage name="email" />
-          </div>
+              <div className={style["error__message"]}>
+                <ErrorMessage name="regNo" />
+              </div>
+            </>
+          ) : (
+            <>
+              <label htmlFor="email">Email</label>
+
+              <Field name="email" type="text" />
+              <div className={style["error__message"]}>
+                <ErrorMessage name="email" />
+              </div>
+            </>
+          )}
 
           <label htmlFor="password">Password</label>
 
@@ -52,7 +88,7 @@ export default function SignIn() {
           <div className={style["error__message"]}>
             <ErrorMessage name="password" />
           </div>
-          <Button type="submit"  className="filled">
+          <Button type="submit" className="filled">
             Submit
           </Button>
           {/* <button type="submit">Submit</button> */}
