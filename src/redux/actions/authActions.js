@@ -50,9 +50,9 @@ export const adminLogin = (formData) => (dispatch) => {
     axios
         .post(`${endPoint}/login`, formData)
         .then(res => {
-            dispatch(loginSuccess(res))
+            dispatch(loginSuccess(res.headers))
             dispatch(loadAuthUserSuccess())
-            console.log(res)
+            console.log(res.headers)
         })
         .catch(err => {
             dispatch(loginFailed())

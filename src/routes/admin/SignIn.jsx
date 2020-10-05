@@ -9,31 +9,36 @@ import { useHistory } from "react-router-dom";
 
 export default function SignIn() {
   const dispatch = useDispatch();
-  const history = useHistory().location.pathname;
-  // const state = useSelector((state) => state.state);
+  const history = useHistory();
+  const auth = useSelector((state) => state.auth);
+  console.log(auth);
 
   const initialValues =
     history === "/student"
-      ? { password: "", regNo: "",exam_id:'1' }
+      ? { passsword: "", regNo: "", exam_id: "1" }
       : { password: "", email: "" };
 
   console.log("history", history);
+  if (
+    auth.isAuth &&
+    (history.location.pathname === "/admin" ||
+      history.location.pathname === "/lecturer")
+  ) {
+    history.push("/admin/dashboard");
+  } else if (auth.isAuth && history.location.pathname === "/student") {
+    console.log("student");
+  }
 
-  const handleSubmit = (values) => {
-
-    return history === "/admin"
+  const handleSubmit = (values,b) => {
+    console.log("setSubmitting",b())
+    return history.location.pathname === "/admin"
       ? dispatch(authActions.adminLogin(values))
-      : history === "/lecturer"
+      : history.location.pathname === "/lecturer"
       ? dispatch(authActions.lecturerLogin(values))
-      : history.toLowerCase() === "/student"
+      : history.location.pathname.toLowerCase() === "/student"
       ? dispatch(authActions.studentLogin(values))
       : "";
   };
-
-
-
-
-
 
   // React.useEffect(() => {
   //   // dispatch(authActions.adminLogin());
@@ -52,7 +57,7 @@ export default function SignIn() {
         })}
         onSubmit={(values, { setSubmitting }) => {
           console.log("submitting", values);
-          handleSubmit(values);
+          handleSubmit(values, setSubmitting);
         }}
       >
         <Form className={style["form--wrapper"]}>
@@ -84,7 +89,8 @@ export default function SignIn() {
           <div className={style["error__message"]}>
             <ErrorMessage name="password" />
           </div>
-          <Button type="submit" className="filled">
+          <Button type="submit" className="filled" >
+            {/* { ? "Loading":"Submit"} */}
             Submit
           </Button>
           {/* <button type="submit">Submit</button> */}

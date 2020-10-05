@@ -163,31 +163,10 @@ const UploadQuestion = ({ values }) => {
   const handleNextBtn = (values) => {
     // console.log(" index", questions[index]);
     setIndex(index + 1);
-    const newQuestion = [...questions].splice(index, 1, values);
-    console.log("newQuestion", newQuestion);
-    questions[index] !== undefined ? handleInputChange() : handleInput(values);
+   
   };
 
-  const handleInputChange = () => {
-    // console.log("input changed");
-    questions[index + 1] === undefined
-      ? setInputChange({ ...inputChange, id: "", question: "", answer: "" })
-      : setInputChange(questions[index + 1]);
 
-    setIndex(index + 1);
-  };
-
-  const handleInput = (values) => {
-    // console.log("handleinput index", index);
-
-    setQuestions([...questions, values]);
-    setInputChange({ ...inputChange, id: "", question: "", answer: "" });
-    setIndex(index + 1);
-
-    // console.log("handleInput", questions[index]);
-  };
-
-  // console.log(questions);
 
   const handleChange = (e) => {
     setInputChange({
