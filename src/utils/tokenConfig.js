@@ -1,8 +1,8 @@
 // import moment from 'moment';
 
-export const finishAuthentication = (token, userData, expires_at) => {
-    sessionStorage.setItem('smart-cbt', token);
-    sessionStorage.setItem('smart-cbt_user_data', JSON.stringify(userData));
+export const finishAuthentication = (token) => {
+    sessionStorage.setItem('sid', token);
+    // sessionStorage.setItem('smart-cbt_user_data', JSON.stringify(userData));
     // sessionStorage.setItem('smart-cbt_expire', JSON.stringify(expires_at));
     // console.log(userData)
     // sessionStorage.setItem('access_token', token);
@@ -18,6 +18,7 @@ export const getToken = () => {
     }
     return null;
 };
+
 // export const getToken = () => {
 //     let token = sessionStorage.getItem('smart-cbt');
 //     if (token && !isSessionExpired()) {

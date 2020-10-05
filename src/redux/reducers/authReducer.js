@@ -5,6 +5,7 @@ import * as tokenConfig from './../../utils/tokenConfig'
 const initialState = {
   token: tokenConfig.getToken(),
   user: tokenConfig.getUserdata(),
+  sid: [],
   isAuth: false,
   isLoading: false,
   data: []
@@ -31,14 +32,12 @@ export default function reducer(state = initialState, action) {
     case types.LOGIN_SUCCESS:
       return {
         ...state,
-        token: action.token,
-        user: action.user,
+        sid: action.data.sid,
         isAuth: true,
         isLoading: false,
       }
     case types.LOGIN_FAILED:
     case types.LOGOUT_SUCCESS:
-      tokenConfig.deleteToken()
       return {
         ...state,
         token: null,

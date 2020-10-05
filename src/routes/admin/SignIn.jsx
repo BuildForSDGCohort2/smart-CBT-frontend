@@ -11,14 +11,13 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const history = useHistory();
   const auth = useSelector((state) => state.auth);
-  console.log(auth);
 
   const initialValues =
-    history === "/student"
+    history.location.pathname === "/student"
       ? { passsword: "", regNo: "", exam_id: "1" }
       : { password: "", email: "" };
 
-  console.log("history", history);
+  // console.log("history", history);
   if (
     auth.isAuth &&
     (history.location.pathname === "/admin" ||
@@ -29,13 +28,13 @@ export default function SignIn() {
     console.log("student");
   }
 
-  const handleSubmit = (values,b) => {
-    console.log("setSubmitting",b())
+  const handleSubmit = (values) => {
     return history.location.pathname === "/admin"
       ? dispatch(authActions.adminLogin(values))
       : history.location.pathname === "/lecturer"
       ? dispatch(authActions.lecturerLogin(values))
-      : history.location.pathname.toLowerCase() === "/student"
+      : history.location.pathname.toLowerCase() === "/student" ||
+        history.location.pathname.toLowerCase() === "/"
       ? dispatch(authActions.studentLogin(values))
       : "";
   };
@@ -56,12 +55,13 @@ export default function SignIn() {
           password: Yup.string().required("Required"),
         })}
         onSubmit={(values, { setSubmitting }) => {
-          console.log("submitting", values);
+          setSubmitting(true);
           handleSubmit(values, setSubmitting);
         }}
       >
         <Form className={style["form--wrapper"]}>
-          {history === "/student" ? (
+          {history.location.pathname === "/student" ||
+          history.location.pathname === "/" ? (
             <>
               <label htmlFor="regNo">Registration Number</label>
 
@@ -89,7 +89,7 @@ export default function SignIn() {
           <div className={style["error__message"]}>
             <ErrorMessage name="password" />
           </div>
-          <Button type="submit" className="filled" >
+          <Button type="submit" className="filled">
             {/* { ? "Loading":"Submit"} */}
             Submit
           </Button>

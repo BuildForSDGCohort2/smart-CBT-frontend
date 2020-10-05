@@ -48,11 +48,13 @@ export const adminLogin = (formData) => (dispatch) => {
     }
     const endPoint = endpoints.ADMIN_URL
     axios
-        .post(`${endPoint}/login`, formData)
+        .post(`${endPoint}/login`, formData,config)
         .then(res => {
-            dispatch(loginSuccess(res.headers))
-            dispatch(loadAuthUserSuccess())
-            console.log(res.headers)
+            const token = res.headers.sid
+            console.log(res);
+
+            tokenConfig.finishAuthentication(token);
+            dispatch(loginSuccess(res.headers));
         })
         .catch(err => {
             dispatch(loginFailed())
@@ -172,7 +174,10 @@ export const logout = () => dispatch => {
     // axios
     //     .post(endpoint, data, config)
     // .then(res => {
+        tokenConfig.deleteToken()
+
     dispatch(logoutSuccess())
+
     // }).catch(err => {
     //     dispatch(logoutSuccess())
     // });

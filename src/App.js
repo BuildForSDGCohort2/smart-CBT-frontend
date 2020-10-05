@@ -28,7 +28,7 @@ export default function app() {
           <Route exact path="/admin" component={SignIn} />
           <Route exact path="/lecturer" component={SignIn} />
           <Route exact path="/Logout" component={SignIn} />
-          <Route exact path="/" component={SignIn} />
+          <AdminRoute exact path="/" component={SignIn} />
 
           <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
           <AdminRoute exact path="/admin/account" component={Account} />
