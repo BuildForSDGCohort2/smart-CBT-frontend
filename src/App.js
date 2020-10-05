@@ -10,6 +10,7 @@ import StudentRoute from './components/StudentRoute';
 import Modal from './components/UploadQuestions/';
 import SignIn from './routes/admin/SignIn'
 import StudentsPortal from './routes/student';
+import UploadQuestion from './routes/UploadQuestion';
 // const Upload = React.lazy(() => import('./routes/Upload'));
 const lecturerDashboard = React.lazy(() => import('./routes/lecturer/Dashboard'));
 const AdminDashboard = React.lazy(() => import('./routes/admin/Dashboard'));
@@ -29,7 +30,7 @@ export default function app() {
           <Route exact path="/Logout" component={SignIn} />
           <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
           <AdminRoute exact path="/admin/account" component={Account} />
-          <AdminRoute exact path="/admin/upload_question" component={Modal} />
+          <AdminRoute exact path="/admin/upload_question" component={UploadQuestion} />
           <AdminRoute exact path="/admin/view_questions" component={ViewQuestion} />
           <AdminRoute exact path="/admin/student" component={Student} />
           <LecturerRoute exact path="/lecturer/dashboard" component={lecturerDashboard} />
