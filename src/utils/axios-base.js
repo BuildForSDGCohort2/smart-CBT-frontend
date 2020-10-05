@@ -7,9 +7,9 @@ import axios from "axios";
 
 const instance = axios.create({
   baseURL: "https://smart-cbt-backend.herokuapp.com/",
-  headers:{
-    Sid:"c0062cb39dadb330f5a5cabdf4491dd6174f4e327fd"
-  }
+  // headers:{
+  //   Sid:"c0062cb39dadb330f5a5cabdf4491dd6174f4e327fd"
+  // }
 });
 
 export default instance;

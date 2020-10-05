@@ -25,6 +25,7 @@ export default function app() {
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
+          <Route exact path="/" component={SignIn} />
           <Route exact path="/admin" component={SignIn} />
           <Route exact path="/lecturer" component={SignIn} />
           <Route exact path="/Logout" component={SignIn} />

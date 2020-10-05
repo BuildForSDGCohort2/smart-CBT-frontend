@@ -56,7 +56,15 @@ export default function SignIn() {
         })}
         onSubmit={(values, { setSubmitting }) => {
           console.log("submitting", values);
-          handleSubmit(values);
+          // handleSubmit(values);
+          return history === "/admin"
+          ? dispatch(authActions.adminLogin(values))
+          : history === "/lecturer"
+          ? dispatch(authActions.lecturerLogin(values))
+          : history.toLowerCase() === "/student"
+          ? dispatch(authActions.studentLogin(values))
+          : "";
+
         }}
       >
         <Form className={style["form--wrapper"]}>
