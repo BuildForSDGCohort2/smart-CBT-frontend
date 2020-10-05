@@ -14,21 +14,12 @@ export default function SignIn() {
 
   const initialValues =
     history === "/student"
-      ? { password: "", regNo: "" }
+      ? { password: "", regNo: "",exam_id:'1' }
       : { password: "", email: "" };
 
   console.log("history", history);
 
   const handleSubmit = (values) => {
-    // console.log(email);
-    // const formData = new FormData();
-
-    // formData.append("email", email);
-    // formData.append("password", password);
-
-    // if(history.location.pathname === "/admin" ){
-    //   dispatch(authActions.adminLogin(formData))
-    // }
 
     return history === "/admin"
       ? dispatch(authActions.adminLogin(values))
@@ -39,10 +30,15 @@ export default function SignIn() {
       : "";
   };
 
-  React.useEffect(() => {
-    // dispatch(authActions.adminLogin());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+
+
+
+
+  // React.useEffect(() => {
+  //   // dispatch(authActions.adminLogin());
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
   return (
     <div className={style["form--container"]}>
       <Formik
@@ -56,15 +52,7 @@ export default function SignIn() {
         })}
         onSubmit={(values, { setSubmitting }) => {
           console.log("submitting", values);
-          // handleSubmit(values);
-          return history === "/admin"
-          ? dispatch(authActions.adminLogin(values))
-          : history === "/lecturer"
-          ? dispatch(authActions.lecturerLogin(values))
-          : history.toLowerCase() === "/student"
-          ? dispatch(authActions.studentLogin(values))
-          : "";
-
+          handleSubmit(values);
         }}
       >
         <Form className={style["form--wrapper"]}>

@@ -25,10 +25,11 @@ export default function app() {
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
-          <Route exact path="/" component={SignIn} />
           <Route exact path="/admin" component={SignIn} />
           <Route exact path="/lecturer" component={SignIn} />
           <Route exact path="/Logout" component={SignIn} />
+          <Route exact path="/" component={SignIn} />
+
           <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
           <AdminRoute exact path="/admin/account" component={Account} />
           <AdminRoute exact path="/admin/upload_question" component={UploadQuestion} />
