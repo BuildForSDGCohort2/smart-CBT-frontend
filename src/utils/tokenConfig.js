@@ -12,7 +12,7 @@ export const finishAuthentication = (token) => {
 };
 
 export const getToken = () => {
-    let token = sessionStorage.getItem('smart-cbt');
+    let token = sessionStorage.getItem('sid');
     if (token) {
         return token;
     }
@@ -40,8 +40,8 @@ export const updateUserData = (userData) => {
 }
 
 export const deleteToken = () => {
-    sessionStorage.removeItem('smart-cbt');
-    sessionStorage.removeItem('nguvu_user_data');
+    sessionStorage.removeItem('sid');
+    // sessionStorage.removeItem('nguvu_user_data');
 };
 
 // export const isSessionExpired = () => {

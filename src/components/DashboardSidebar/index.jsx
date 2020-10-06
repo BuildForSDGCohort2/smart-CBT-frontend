@@ -42,6 +42,7 @@ export default function useDashboardSideBar() {
         <li>
           <NavLink
             activeClassName={style["active"]}
+            exact
             to={"/admin"}
             onClick={() => dispatch(authActions.logout())}
           >

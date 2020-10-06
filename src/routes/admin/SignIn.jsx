@@ -39,10 +39,7 @@ export default function SignIn() {
       : "";
   };
 
-  // React.useEffect(() => {
-  //   // dispatch(authActions.adminLogin());
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+
   return (
     <div className={style["form--container"]}>
       <Formik
